@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Admin & internal tools — not for indexing
+Disallow: /admin
+Disallow: /filemanager
+
+Sitemap: https://bandanbhagwati.com/sitemap.xml

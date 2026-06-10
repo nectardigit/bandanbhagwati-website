@@ -1,0 +1,128 @@
+/* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
+
+/* ---- Hero background video: force muted autoplay (some browsers ignore the attribute) ---- */
+document.querySelectorAll("video.hero-bg").forEach(v => {
+  v.muted = true;
+  v.setAttribute("muted", "");
+  v.playsInline = true;
+  const play = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+  play();
+  v.addEventListener("loadeddata", play, { once: true });
+  v.addEventListener("canplay", play, { once: true });
+  // if the browser blocked autoplay, start on the first interaction
+  const kick = () => { play(); document.removeEventListener("click", kick); document.removeEventListener("scroll", kick); };
+  document.addEventListener("click", kick, { once: true });
+  document.addEventListener("scroll", kick, { once: true });
+});
+
+/* ---- "More services" list on service-detail (just highlight) ---- */
+document.querySelectorAll(".more-serv").forEach(list => {
+  list.querySelectorAll(".serv-item").forEach(item => {
+    item.addEventListener("click", () => {
+      list.querySelectorAll(".serv-item").forEach(x => x.classList.remove("active"));
+      item.classList.add("active");
+    });
+  });
+});
+
+/* ---- Services selector (home / about / service): clicking a list item updates the
+        preview card in place; only "Explore now" navigates to the detail page. ---- */
+document.querySelectorAll(".serv-list").forEach(list => {
+  const section = list.closest(".services") || document;
+  const card = section.querySelector(".serv-card");
+  if (!card) return;
+  const cardImg = card.querySelector(".serv-media img");
+  const cardBtn = card.querySelector(".serv-media .btn");
+  const cardTitle = card.querySelector(".body h3");
+  const cardDesc = card.querySelector(".body p");
+
+  const apply = item => {
+    if (item.dataset.image && cardImg) cardImg.src = item.dataset.image;
+    if (item.dataset.title && cardTitle) cardTitle.textContent = item.dataset.title;
+    if (item.dataset.desc && cardDesc) cardDesc.textContent = item.dataset.desc;
+    if (item.dataset.url && cardBtn) cardBtn.setAttribute("onclick", "location.href='" + item.dataset.url + "'");
+  };
+
+  list.querySelectorAll(".serv-item").forEach(item => {
+    item.addEventListener("click", () => {
+      list.querySelectorAll(".serv-item").forEach(x => x.classList.remove("active"));
+      item.classList.add("active");
+      apply(item);
+    });
+  });
+
+  // initialise the card from the active (first) item
+  apply(list.querySelector(".serv-item.active") || list.querySelector(".serv-item"));
+});
+
+/* ---- FAQ accordion ---- */
+document.querySelectorAll(".faq-list").forEach(faqList => {
+  const sync = () => faqList.querySelectorAll(".faq-item").forEach(it => {
+    const a = it.querySelector(".faq-a");
+    if (a) a.style.maxHeight = it.classList.contains("open") ? a.scrollHeight + 40 + "px" : "0px";
+  });
+  faqList.querySelectorAll(".faq-q").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains("open");
+      faqList.querySelectorAll(".faq-item").forEach(x => x.classList.remove("open"));
+      if (!wasOpen) item.classList.add("open");
+      sync();
+    });
+  });
+  sync();
+});
+
+/* ---- Project Ongoing / Completed toggle (project page) ---- */
+const projToggle = document.querySelector(".proj-toggle");
+if (projToggle) {
+  const grid = document.getElementById("projGrid");
+  const tabs = projToggle.querySelectorAll("button");
+  const apply = set => {
+    if (!grid) return;
+    grid.querySelectorAll(".proj-card").forEach(card => {
+      card.style.display = (card.dataset.set === set) ? "" : "none";
+    });
+  };
+  tabs.forEach(t => t.addEventListener("click", () => {
+    tabs.forEach(x => x.classList.remove("active"));
+    t.classList.add("active");
+    apply(t.dataset.set);
+  }));
+  const initial = projToggle.querySelector("button.active");
+  apply(initial ? initial.dataset.set : "ongoing");
+}
+
+/* ---- Equipment category filter (equipment list page) ---- */
+const equipFilter = document.querySelector(".equip-filter");
+if (equipFilter) {
+  const grid = document.getElementById("equipFilterGrid");
+  const btns = equipFilter.querySelectorAll("button");
+  const apply = cat => {
+    if (!grid) return;
+    grid.querySelectorAll(".eq-card").forEach(card => {
+      card.style.display = (cat === "all" || card.dataset.cat === cat) ? "" : "none";
+    });
+  };
+  btns.forEach(b => b.addEventListener("click", () => {
+    btns.forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    apply(b.dataset.cat);
+  }));
+  // apply the pre-selected category on load (e.g. arriving from a category card)
+  const initial = equipFilter.querySelector("button.active");
+  if (initial && initial.dataset.cat !== "all") apply(initial.dataset.cat);
+}
+
+/* ---- FAQ category filter (faq page): show only the chosen category's group ---- */
+const faqFilter = document.querySelector(".faq-filter");
+if (faqFilter) {
+  const blocks = document.querySelectorAll(".faq-group-block");
+  const btns = faqFilter.querySelectorAll("button");
+  btns.forEach(b => b.addEventListener("click", () => {
+    btns.forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    const cat = b.dataset.cat;
+    blocks.forEach(bl => { bl.style.display = (cat === "all" || bl.dataset.cat === cat) ? "" : "none"; });
+  }));
+}
