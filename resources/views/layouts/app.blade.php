@@ -195,7 +195,7 @@
   <div class="footer-bot">
     <div class="wrap">
       <span>Copyright © {{ date('Y') }} {{ $s['company_name'] ?? 'Bandan Bhagwati' }}. All rights reserved.</span>
-      <span class="dev">• Developed BY: <b>Nectar Digit</b></span>
+      <span class="dev">• Developed BY: <a href="https://nectardigit.com/" target="_blank" rel="noopener"><b>Nectar Digit</b></a></span>
     </div>
   </div>
 </footer>

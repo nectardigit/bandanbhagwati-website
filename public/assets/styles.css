@@ -655,6 +655,8 @@ img.cone{object-fit:contain}
 .footer-bot{border-top:1px solid rgba(255,255,255,.18);margin-top:56px;padding:24px 0}
 .footer-bot .wrap{display:flex;justify-content:space-between;align-items:center;grid-template-columns:none}
 .footer-bot .dev b{color:var(--orange)}
+.footer-bot .dev a{text-decoration:none}
+.footer-bot .dev a:hover b{text-decoration:underline}
 
 /* ===== hamburger (mobile) ===== */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:46px;height:46px;
