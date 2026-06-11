@@ -407,6 +407,17 @@ button{font-family:inherit;cursor:pointer}
 .client-name:hover{border-color:var(--orange);color:var(--orange)}
 @media(max-width:980px){.client-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.client-grid{grid-template-columns:repeat(2,1fr)}}
+/* Dedicated Our Clients page */
+.clients-page-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.client-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 18px;text-align:center;transition:.2s}
+.client-card a{display:block;color:inherit;text-decoration:none}
+.client-card:hover{box-shadow:0 14px 30px rgba(15,19,32,.1);transform:translateY(-3px);border-color:transparent}
+.client-card .logo-wrap{height:92px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.client-card .logo-wrap img{max-width:100%;max-height:92px;object-fit:contain}
+.client-card .ph{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg,#0b4fa8,#073a7d);color:#fff;font-weight:800;font-size:26px;letter-spacing:1px}
+.client-card .nm{font-weight:600;font-size:14px;color:var(--blue);line-height:1.45}
+@media(max-width:980px){.clients-page-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.clients-page-grid{grid-template-columns:repeat(2,1fr)}}
 .team-card{position:relative;border-radius:18px;overflow:hidden;height:300px;box-shadow:0 12px 28px rgba(15,19,32,.1)}
 .team-card img{width:100%;height:100%;object-fit:cover}
 .team-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,12,20,.85) 100%);opacity:.6;transition:.3s}

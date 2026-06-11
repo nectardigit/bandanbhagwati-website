@@ -146,6 +146,13 @@ class SiteController extends Controller
         ]);
     }
 
+    public function clients()
+    {
+        return view('clients', [
+            'clients' => Client::where('is_active', true)->orderBy('sort')->get(),
+        ]);
+    }
+
     public function blog()
     {
         return view('blog', [
