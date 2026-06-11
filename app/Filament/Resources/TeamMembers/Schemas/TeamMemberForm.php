@@ -16,6 +16,9 @@ class TeamMemberForm
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('role'),
+                TextInput::make('department')
+                    ->datalist(fn () => \App\Models\TeamMember::query()->whereNotNull('department')->distinct()->pluck('department')->all())
+                    ->helperText('Members are grouped under this heading on the Team page (e.g. Board of Directors, Technical Team).'),
                 FileManagerPicker::make('photo')
                     ->label('Photo'),
                 TextInput::make('facebook'),

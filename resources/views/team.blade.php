@@ -9,11 +9,17 @@
 <!-- ===== TEAM ===== -->
 <section class="section">
   <div class="wrap">
-    <span class="eyebrow">Our Ongoing Project</span>
-    <h2 class="h-sec">Work in Action</h2>
-    <p class="sub" style="margin-bottom:44px">Delivering quality through every step of the process.</p>
-    <div class="team-grid" id="teamGrid">
-      @foreach ($members as $m)
+    <span class="eyebrow">Our Team</span>
+    <h2 class="h-sec">Meet the Team</h2>
+    <p class="sub" style="margin-bottom:44px">The experienced board, engineers, and professionals behind Bandan Bhagwati Nirman Sewa.</p>
+
+    @php($grouped = $members->groupBy(fn ($m) => $m->department ?: 'Our Team'))
+    @foreach ($grouped as $department => $group)
+    @if ($grouped->count() > 1)
+    <h3 class="team-dept">{{ $department }}</h3>
+    @endif
+    <div class="team-grid">
+      @foreach ($group as $m)
       <article class="team-card">
         <img loading="lazy" decoding="async" src="{{ media($m->photo) }}" alt="{{ $m->name }}">
         <div class="info">
@@ -29,6 +35,7 @@
       </article>
       @endforeach
     </div>
+    @endforeach
   </div>
 </section>
 @endsection

@@ -371,6 +371,9 @@ button{font-family:inherit;cursor:pointer}
 
 /* ===== Team list page ===== */
 .team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.team-dept{font-size:23px;font-weight:700;color:var(--blue);margin:42px 0 22px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.team-dept:first-of-type{margin-top:0}
+.team-grid+.team-dept{margin-top:46px}
 .team-card{position:relative;border-radius:18px;overflow:hidden;height:300px;box-shadow:0 12px 28px rgba(15,19,32,.1)}
 .team-card img{width:100%;height:100%;object-fit:cover}
 .team-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,12,20,.85) 100%);opacity:0;transition:.3s}
