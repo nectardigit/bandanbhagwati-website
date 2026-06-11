@@ -418,6 +418,16 @@ button{font-family:inherit;cursor:pointer}
 .client-card .nm{font-weight:600;font-size:14px;color:var(--blue);line-height:1.45}
 @media(max-width:980px){.clients-page-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.clients-page-grid{grid-template-columns:repeat(2,1fr)}}
+/* Auto-scrolling clients marquee (home) — full colour logos */
+.client-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.client-track{display:flex;gap:20px;width:max-content;animation:client-scroll 60s linear infinite}
+.client-marquee:hover .client-track{animation-play-state:paused}
+@keyframes client-scroll{to{transform:translateX(-50%)}}
+.mq-card{flex:0 0 208px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+.mq-card .lw{height:64px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.mq-card .lw img{max-width:100%;max-height:64px;object-fit:contain}
+.mq-card .nm{font-size:12.5px;font-weight:600;color:var(--blue);line-height:1.35}
+@media (prefers-reduced-motion:reduce){.client-track{animation:none;flex-wrap:wrap;justify-content:center}}
 .team-card{position:relative;border-radius:18px;overflow:hidden;height:300px;box-shadow:0 12px 28px rgba(15,19,32,.1)}
 .team-card img{width:100%;height:100%;object-fit:cover}
 .team-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(8,12,20,.85) 100%);opacity:.6;transition:.3s}

@@ -275,23 +275,27 @@
     </div>
     @php($logoClients = $clients->filter(fn ($c) => ! empty($c->logo)))
     @php($textClients = $clients->filter(fn ($c) => empty($c->logo)))
-    @if ($logoClients->count())
-    <div class="client-grid">
-      @foreach ($logoClients->take(6) as $cl)
-        <div class="client-logo" title="{{ $cl->name }}">
-          @if ($cl->url)<a href="{{ $cl->url }}" target="_blank" rel="noopener">@endif
-            <img loading="lazy" decoding="async" src="{{ media($cl->logo) }}" alt="{{ $cl->name }}">
-          @if ($cl->url)</a>@endif
+    @if ($clients->count())
+    <div class="client-marquee">
+      <div class="client-track">
+        @foreach ($clients as $cl)
+        <div class="mq-card" title="{{ $cl->name }}">
+          <div class="lw">
+            @if ($cl->logo)<img loading="lazy" decoding="async" src="{{ media($cl->logo) }}" alt="{{ $cl->name }}">@endif
+          </div>
+          <div class="nm">{{ $cl->name }}</div>
         </div>
-      @endforeach
-    </div>
-    @endif
-    @if ($textClients->count())
-    <p class="sub" style="text-align:center;margin:40px auto 18px;max-width:560px">Our work is trusted by government bodies and leading organizations across Nepal:</p>
-    <div class="client-names">
-      @foreach ($textClients->take(14) as $cl)
-        <span class="client-name">{{ $cl->name }}</span>
-      @endforeach
+        @endforeach
+        {{-- duplicate set for a seamless infinite loop --}}
+        @foreach ($clients as $cl)
+        <div class="mq-card" aria-hidden="true">
+          <div class="lw">
+            @if ($cl->logo)<img loading="lazy" decoding="async" src="{{ media($cl->logo) }}" alt="">@endif
+          </div>
+          <div class="nm">{{ $cl->name }}</div>
+        </div>
+        @endforeach
+      </div>
     </div>
     @endif
     <div style="text-align:center;margin-top:40px">
