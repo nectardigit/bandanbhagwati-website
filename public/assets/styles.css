@@ -474,7 +474,10 @@ img.cone{object-fit:contain}
 .services .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
 .serv-left h2{font-size:42px;font-weight:700;line-height:1.12;margin:0 0 20px}
 .serv-left .sub{margin-bottom:34px}
-.serv-list{display:flex;flex-direction:column;gap:18px}
+.serv-list{display:flex;flex-direction:column;gap:18px;max-height:330px;overflow-y:auto;padding:4px 10px 4px 2px;scrollbar-width:thin}
+.serv-list::-webkit-scrollbar{width:7px}
+.serv-list::-webkit-scrollbar-thumb{background:var(--orange);border-radius:999px}
+.serv-list::-webkit-scrollbar-track{background:rgba(15,19,32,.06);border-radius:999px}
 .serv-item{
   display:flex;align-items:center;justify-content:space-between;
   background:#fff;border-radius:999px;padding:20px 26px;font-weight:600;font-size:19px;
