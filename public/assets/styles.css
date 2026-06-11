@@ -375,6 +375,15 @@ button{font-family:inherit;cursor:pointer}
 .team-dept:first-of-type{margin-top:0}
 .team-grid+.team-dept{margin-top:46px}
 
+/* ===== About features "see more" collapse ===== */
+.about-feats{position:relative;overflow:hidden;transition:max-height .45s ease}
+.about-feats:not(.open){max-height:330px}
+.about-feats.open{max-height:5000px}
+.about-feats:not(.open)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:84px;background:linear-gradient(rgba(255,255,255,0),#fff);pointer-events:none}
+.see-more-btn{background:none;border:none;color:var(--orange);font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;padding:8px 0 18px}
+.see-more-btn .caret{transition:.25s}
+.about-feats.open ~ .see-more-btn .caret{transform:rotate(180deg)}
+
 /* ===== Clients / partners ===== */
 .clients-sec{background:#f7f9fc}
 .client-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;align-items:stretch}

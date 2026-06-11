@@ -48,12 +48,17 @@
         ['title' => "Validate your manufacturer's warranty", 'text' => 'Magna reprehenderit tempor do elit mollit officia fugiat ullamco duis ex aute quis. Est excepteur velit incididunt laborum nulla minim.'],
         ['title' => "Validate your manufacturer's warranty", 'text' => 'Magna reprehenderit tempor do elit mollit officia fugiat ullamco duis ex aute quis. Est excepteur velit incididunt laborum nulla minim.'],
       ])
-      @foreach ($aboutFeatures as $f)
-      <div class="feat">
-        <span class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
-        <div><h4>{{ $f['title'] ?? '' }}</h4><p>{{ $f['text'] ?? '' }}</p></div>
+      <div class="about-feats {{ count($aboutFeatures) <= 2 ? 'open' : '' }}" id="aboutFeats">
+        @foreach ($aboutFeatures as $f)
+        <div class="feat">
+          <span class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+          <div><h4>{{ $f['title'] ?? '' }}</h4><p>{{ $f['text'] ?? '' }}</p></div>
+        </div>
+        @endforeach
       </div>
-      @endforeach
+      @if (count($aboutFeatures) > 2)
+      <button type="button" class="see-more-btn" data-target="aboutFeats"><span class="lbl">See more</span> <span class="caret">▾</span></button>
+      @endif
       <div class="about-cards">
         <div class="about-card"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="6"/><path d="M8.2 13.6 7 22l5-3 5 3-1.2-8.4"/><path d="m12 5 1 2 2.1.3-1.5 1.5.4 2.1L12 11.9 9.5 12.9l.4-2.1L8.4 9.3 10.5 9z"/></svg></span>{{ $about?->card_one ?: 'Building quality standards' }}</div>
         <div class="about-card"><span class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M15.5 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4.5-5.8"/></svg></span>{{ $about?->card_two ?: "Certified engineer's team" }}</div>

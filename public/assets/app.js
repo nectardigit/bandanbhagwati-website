@@ -1,5 +1,16 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
+/* ---- "See more / See less" collapsible blocks ---- */
+document.querySelectorAll(".see-more-btn").forEach(btn => {
+  const target = document.getElementById(btn.dataset.target);
+  if (!target) return;
+  btn.addEventListener("click", () => {
+    const open = target.classList.toggle("open");
+    const lbl = btn.querySelector(".lbl");
+    if (lbl) lbl.textContent = open ? "See less" : "See more";
+  });
+});
+
 /* ---- Hero background video: force muted autoplay (some browsers ignore the attribute) ---- */
 document.querySelectorAll("video.hero-bg").forEach(v => {
   v.muted = true;
