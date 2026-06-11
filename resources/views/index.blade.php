@@ -273,16 +273,27 @@
       <span class="eyebrow" style="justify-content:center">Our Clients</span>
       <h2 class="h-sec">Trusted by Leading Organizations</h2>
     </div>
+    @php($logoClients = $clients->filter(fn ($c) => ! empty($c->logo)))
+    @php($textClients = $clients->filter(fn ($c) => empty($c->logo)))
+    @if ($logoClients->count())
     <div class="client-grid">
-      @foreach ($clients as $cl)
-        @php($logo = $cl->logo ? media($cl->logo) : '')
+      @foreach ($logoClients as $cl)
         <div class="client-logo" title="{{ $cl->name }}">
           @if ($cl->url)<a href="{{ $cl->url }}" target="_blank" rel="noopener">@endif
-            @if ($logo)<img loading="lazy" decoding="async" src="{{ $logo }}" alt="{{ $cl->name }}">@else<span>{{ $cl->name }}</span>@endif
+            <img loading="lazy" decoding="async" src="{{ media($cl->logo) }}" alt="{{ $cl->name }}">
           @if ($cl->url)</a>@endif
         </div>
       @endforeach
     </div>
+    @endif
+    @if ($textClients->count())
+    <p class="sub" style="text-align:center;margin:40px auto 18px;max-width:560px">Our work is trusted by government bodies and leading organizations across Nepal:</p>
+    <div class="client-names">
+      @foreach ($textClients as $cl)
+        <span class="client-name">{{ $cl->name }}</span>
+      @endforeach
+    </div>
+    @endif
   </div>
 </section>
 @endif
