@@ -22,14 +22,14 @@ class SiteController extends Controller
     public function home()
     {
         return view('index', [
-            'equipment'    => Equipment::where('is_active', true)->orderBy('sort')->take(4)->get(),
+            'equipment'    => Equipment::where('is_active', true)->orderBy('sort')->take(12)->get(),
             'categories'   => Category::where('is_active', true)->orderBy('sort')->take(8)->get(),
             'services'     => Service::where('is_active', true)->where('show_in_accordion', true)->orderBy('sort')->get(),
-            'projects'     => Project::where('is_active', true)->where('status', 'completed')->orderBy('sort')->take(4)->get(),
-            'ongoing'      => Project::where('is_active', true)->where('status', 'ongoing')->orderBy('sort')->take(4)->get(),
+            'projects'     => Project::where('is_active', true)->where('status', 'completed')->orderBy('sort')->take(12)->get(),
+            'ongoing'      => Project::where('is_active', true)->where('status', 'ongoing')->orderBy('sort')->take(12)->get(),
             'testimonials' => Testimonial::where('is_active', true)->orderBy('sort')->get(),
             'faqs'         => Faq::where('is_active', true)->orderBy('sort')->get(),
-            'posts'        => BlogPost::published()->latest('published_at')->take(4)->get(),
+            'posts'        => BlogPost::published()->latest('published_at')->take(8)->get(),
             'clients'      => Client::where('is_active', true)->orderBy('sort')->get(),
         ]);
     }

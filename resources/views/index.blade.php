@@ -78,7 +78,7 @@
         <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
       </div>
     </div>
-    <div class="grid4" id="equipGrid">
+    <div class="grid4 h-scroll" id="equipGrid">
       @foreach ($equipment as $e)
       <article class="eq-card">
         <img loading="lazy" decoding="async" src="{{ media($e->image) }}" alt="{{ $e->name }}">
@@ -158,7 +158,7 @@
         <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
       </div>
     </div>
-    <div class="proj-grid" id="projGrid">
+    <div class="proj-grid h-scroll" id="projGrid">
       @foreach ($projects as $p)
       <a class="proj-card" href="{{ route('projects.show', $p) }}">
         <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
@@ -180,7 +180,7 @@
         <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
       </div>
     </div>
-    <div class="proj-grid" id="ongoingGrid">
+    <div class="proj-grid h-scroll" id="ongoingGrid">
       @foreach ($ongoing as $p)
       <a class="proj-card" href="{{ route('projects.show', $p) }}">
         <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
@@ -309,7 +309,7 @@
         <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
       </div>
     </div>
-    <div class="grid4" id="blogGrid">
+    <div class="grid4 h-scroll" id="blogGrid">
       @foreach ($posts as $post)
       <a class="blog-card" href="{{ route('blog.show', $post) }}">
         <div class="thumb"><img loading="lazy" decoding="async" src="{{ media($post->cover_image) }}" alt="{{ $post->title }}"></div>

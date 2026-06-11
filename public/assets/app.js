@@ -1,5 +1,16 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
+/* ---- Section carousels: prev/next arrows scroll the .h-scroll track ---- */
+document.querySelectorAll(".arrows").forEach(arrows => {
+  const sec = arrows.closest("section");
+  const track = sec && sec.querySelector(".h-scroll");
+  if (!track) return;
+  const b = arrows.querySelectorAll("button");
+  const page = () => Math.max(track.clientWidth * 0.85, 260);
+  if (b[0]) b[0].addEventListener("click", () => track.scrollBy({ left: -page(), behavior: "smooth" }));
+  if (b[1]) b[1].addEventListener("click", () => track.scrollBy({ left: page(), behavior: "smooth" }));
+});
+
 /* ---- "See more / See less" collapsible blocks ---- */
 document.querySelectorAll(".see-more-btn").forEach(btn => {
   const target = document.getElementById(btn.dataset.target);
