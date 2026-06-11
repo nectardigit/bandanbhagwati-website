@@ -41,7 +41,6 @@
       <a class="item" href="tel:{{ preg_replace('/[^0-9+]/', '', $s['phone'] ?? '+9779825252525') }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> {{ $s['phone'] ?? '+977-9825252525' }}</a>
     </div>
     <div class="right">
-      <span class="item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg> {{ $s['language_label'] ?? 'English' }}</span>
       <a class="item" href="{{ $s['support_url'] ?? '#' }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.4 11A6.4 6.4 0 0 0 5.6 11"/><path d="M12 2a10 10 0 0 0-10 10v4a3 3 0 0 0 3 3h1v-7H4"/><path d="M22 16v-4A10 10 0 0 0 12 2"/><path d="M20 17v1a3 3 0 0 1-3 3h-4"/><path d="M22 13v3a3 3 0 0 1-3 0v-3a1 1 0 0 1 3 0z"/></svg> {{ $s['support_label'] ?? 'Support' }}</a>
       <div class="socials">
         <a href="{{ $s['social_facebook'] ?? '#' }}" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.5-3H14V4.5c0-.9.3-1.5 1.6-1.5H18V.2A21 21 0 0 0 15.5 0C12.9 0 11 1.6 11 4.4V6H8v3h3v9h3z"/></svg></a>
@@ -102,9 +101,6 @@
         @endforelse
       </div>
       <div class="nav-actions">
-        <button class="search-btn" aria-label="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        </button>
         <button class="btn talk-btn" onclick="location.href='{{ $s['talk_url'] ?? url('/contact') }}'">{{ $s['talk_label'] ?? "Let's Talk" }} <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
       </div>
     </nav>

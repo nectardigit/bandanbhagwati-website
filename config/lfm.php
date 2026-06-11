@@ -32,7 +32,7 @@ return [
     |
      */
 
-    'allow_private_folder'     => true,
+    'allow_private_folder'     => false,
 
     // Flexible way to customize client folders accessibility
     // If you want to customize client folders, publish tag="lfm_handler"
@@ -43,7 +43,7 @@ return [
 
     'allow_shared_folder'      => true,
 
-    'shared_folder_name'       => 'shares',
+    'shared_folder_name'       => '1', // all admins share the existing media library (photos/1)
 
     /*
     |--------------------------------------------------------------------------

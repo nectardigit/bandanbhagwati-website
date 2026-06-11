@@ -63,8 +63,20 @@
 </section>
 
 <!-- ===== MAP ===== -->
+@php
+  $map = trim($settings['map_embed'] ?? '');
+  if ($map === '') {
+      $mapSrc = 'https://www.google.com/maps?q='.urlencode($settings['address'] ?? 'Sundhara,Kathmandu,Nepal').'&output=embed';
+  } elseif (preg_match('/src=["\']([^"\']+)["\']/', $map, $m)) {
+      $mapSrc = $m[1];                                                  // pasted a whole <iframe …> — pull out its src
+  } elseif (\Illuminate\Support\Str::startsWith($map, 'http')) {
+      $mapSrc = $map;                                                   // a bare Google Maps embed URL
+  } else {
+      $mapSrc = 'https://www.google.com/maps?q='.urlencode($map).'&output=embed'; // "lat,lng" or place text
+  }
+@endphp
 <section>
   <iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-    src="https://www.google.com/maps?q={{ urlencode($settings['address'] ?? 'Sundhara,Kathmandu,Nepal') }}&output=embed"></iframe>
+    src="{{ $mapSrc }}"></iframe>
 </section>
 @endsection

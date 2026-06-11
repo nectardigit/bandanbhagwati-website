@@ -78,7 +78,13 @@ const projToggle = document.querySelector(".proj-toggle");
 if (projToggle) {
   const grid = document.getElementById("projGrid");
   const tabs = projToggle.querySelectorAll("button");
+  const crumb = document.getElementById("projCrumb");
+  const eyebrow = document.getElementById("projEyebrow");
+  const labels = { ongoing: "Ongoing", completed: "Completed" };
   const apply = set => {
+    const name = labels[set] || "Ongoing";
+    if (crumb) crumb.textContent = name + " project";
+    if (eyebrow) eyebrow.textContent = name + " Project";
     if (!grid) return;
     grid.querySelectorAll(".proj-card").forEach(card => {
       card.style.display = (card.dataset.set === set) ? "" : "none";

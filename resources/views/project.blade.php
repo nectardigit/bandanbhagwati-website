@@ -11,7 +11,7 @@
   <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80')"></div>
   <div class="wrap">
     <h1>Project</h1>
-    <p class="crumb"><a href="{{ url('/') }}">Home</a> – <span class="cur">Ongoing project</span></p>
+    <p class="crumb"><a href="{{ url('/') }}">Home</a> – <span class="cur" id="projCrumb">Ongoing project</span></p>
   </div>
 </section>
 
@@ -20,7 +20,7 @@
   <div class="wrap">
     <div class="head-row" style="align-items:center">
       <div>
-        <span class="eyebrow">Ongoing Project</span>
+        <span class="eyebrow" id="projEyebrow">Ongoing Project</span>
         <h2 class="h-sec" style="margin-bottom:6px">Showcasing Our Work</h2>
         <p class="sub">Our clients' feedback speaks volumes about our commitment and quality.</p>
       </div>

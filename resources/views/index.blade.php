@@ -22,7 +22,11 @@
   @endif
   <div class="wrap">
     <p class="kicker">{{ $settings['hero_kicker'] ?? 'We Developed Landmark Real Estate Projects.' }}</p>
-    <h1>We Your <span class="o">Trusted</span><br><span class="o">Construction</span> Partner</h1>
+    @if ($home?->hero_title)
+      <h1>{{ $home->hero_title }}</h1>
+    @else
+      <h1>We Your <span class="o">Trusted</span><br><span class="o">Construction</span> Partner</h1>
+    @endif
     <p>{{ $settings['hero_subtitle'] ?? 'We turn complex challenges into simple, effective solutions. Delivering every project on time, across Nepal.' }}</p>
     <div class="cta">
       <button class="btn btn-orange" onclick="location.href='{{ url('/service') }}'">Get Started {!! $arrow !!}</button>
@@ -63,8 +67,11 @@
 <section class="section" style="padding-top:20px">
   <div class="wrap">
     <div class="head-row">
-      <div><h2 class="h-sec">Equipment Showcase</h2><p class="sub">Our clients' feedback speaks volumes about our commitment and quality.</p></div>
-      <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      <div><h2 class="h-sec">{{ $home?->equip_title ?: 'Equipment Showcase' }}</h2><p class="sub">{{ $home?->equip_sub ?: "Our clients' feedback speaks volumes about our commitment and quality." }}</p></div>
+      <div class="head-actions">
+        <a class="btn btn-orange" href="{{ url('/equipment') }}">View all {!! $arrow !!}</a>
+        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </div>
     </div>
     <div class="grid4" id="equipGrid">
       @foreach ($equipment as $e)
@@ -84,9 +91,9 @@
 <!-- ===== CATEGORIES ===== -->
 <section class="section cats">
   <div class="wrap">
-    <span class="eyebrow">Category</span>
-    <h2 class="h-sec">Equipment Categories</h2>
-    <p class="sub" style="margin-bottom:50px">Browse our extensive collection of construction equipment</p>
+    <span class="eyebrow">{{ $home?->cat_eyebrow ?: 'Category' }}</span>
+    <h2 class="h-sec">{{ $home?->cat_title ?: 'Equipment Categories' }}</h2>
+    <p class="sub" style="margin-bottom:50px">{{ $home?->cat_sub ?: 'Browse our extensive collection of construction equipment' }}</p>
     <div class="cat-grid" id="catGrid">
       @foreach ($categories as $c)
       <a class="cat" href="{{ route('equipment', ['category' => $c->slug]) }}">
@@ -103,8 +110,8 @@
 <section class="section services" id="services">
   <div class="wrap">
     <div class="serv-left">
-      <h2>Trusted Construction Services for Every Client</h2>
-      <p class="sub">Delivering reliable, innovative, and high-quality construction solutions tailored to every client's needs. Committed to excellence with services designed to build trust and lasting value.</p>
+      <h2>{{ $home?->services_title ?: 'Trusted Construction Services for Every Client' }}</h2>
+      <p class="sub">{{ $home?->services_sub ?: "Delivering reliable, innovative, and high-quality construction solutions tailored to every client's needs. Committed to excellence with services designed to build trust and lasting value." }}</p>
       <div class="serv-list" id="servList">
         @foreach ($services as $service)
         <div class="serv-item {{ $loop->first ? 'active' : '' }}"
@@ -120,7 +127,7 @@
     </div>
     @php($firstSvc = $services->first())
     <div class="serv-right">
-      <div style="text-align:right;margin-bottom:20px"><a href="{{ url('/service') }}" class="view-more">View more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+      <div style="text-align:right;margin-bottom:20px"><a href="{{ url('/service') }}" class="btn btn-orange">View all <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
       <div class="serv-card">
         <div class="serv-media">
           <img loading="lazy" decoding="async" src="{{ $firstSvc && $firstSvc->image ? media($firstSvc->image) : 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80' }}" alt="service">
@@ -138,10 +145,13 @@
 <!-- ===== OUR PROJECT ===== -->
 <section class="section" id="projects">
   <div class="wrap">
-    <span class="eyebrow">Our Project</span>
+    <span class="eyebrow">{{ $home?->projects_eyebrow ?: 'Our Project' }}</span>
     <div class="head-row">
-      <div><h2 class="h-sec">Showcasing Our Work</h2><p class="sub">Our clients' feedback speaks volumes about our commitment and quality.</p></div>
-      <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      <div><h2 class="h-sec">{{ $home?->projects_title ?: 'Showcasing Our Work' }}</h2><p class="sub">{{ $home?->projects_sub ?: "Our clients' feedback speaks volumes about our commitment and quality." }}</p></div>
+      <div class="head-actions">
+        <a class="btn btn-orange" href="{{ url('/project') }}">View all {!! $arrow !!}</a>
+        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </div>
     </div>
     <div class="proj-grid" id="projGrid">
       @foreach ($projects as $p)
@@ -157,10 +167,13 @@
 <!-- ===== ONGOING PROJECT ===== -->
 <section class="section ongoing">
   <div class="wrap">
-    <span class="eyebrow">Our Ongoing Project</span>
+    <span class="eyebrow">{{ $home?->ongoing_eyebrow ?: 'Our Ongoing Project' }}</span>
     <div class="head-row">
-      <div><h2 class="h-sec">Work in Action</h2><p class="sub">Delivering quality through every step of the process.</p></div>
-      <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      <div><h2 class="h-sec">{{ $home?->ongoing_title ?: 'Work in Action' }}</h2><p class="sub">{{ $home?->ongoing_sub ?: 'Delivering quality through every step of the process.' }}</p></div>
+      <div class="head-actions">
+        <a class="btn btn-orange" href="{{ url('/project') }}">View all {!! $arrow !!}</a>
+        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </div>
     </div>
     <div class="proj-grid" id="ongoingGrid">
       @foreach ($ongoing as $p)
@@ -187,9 +200,9 @@
 <section class="contact" id="contact">
   <div class="img" style="background-image:url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1000&q=80')"></div>
   <div class="panel">
-    <span class="eyebrow">Contactat Us Anytime</span>
-    <h2>Have a Project in Mind? Let's Talk.</h2>
-    <p>Bandan Bhagwato is a sacred expression of devotion and cultural unity. It represents the deep bond between faith, tradition, and community, bringing people together in reverence and shared belief. Rooted in spiritual values, Bandan Bhagwato stands as a meaningful symbol of harmony and purpose.</p>
+    <span class="eyebrow">{{ $home?->cta_eyebrow ?: 'Contact Us Anytime' }}</span>
+    <h2>{{ $home?->cta_title ?: "Have a Project in Mind? Let's Talk." }}</h2>
+    <p>{{ $home?->cta_text ?: 'Bandan Bhagwati is a sacred expression of devotion and cultural unity. It represents the deep bond between faith, tradition, and community, bringing people together in reverence and shared belief.' }}</p>
     <button class="btn btn-orange" style="align-self:flex-start" onclick="location.href='{{ url('/contact') }}'">Explore now {!! $arrow !!}</button>
   </div>
 </section>
@@ -198,9 +211,9 @@
 <section class="section faq">
   <div class="wrap">
     <div>
-      <span class="eyebrow">FAQ's</span>
-      <h2 class="h-sec">frequently asked questions</h2>
-      <p class="sub">Delivering quality through every step of the process.</p>
+      <span class="eyebrow">{{ $home?->faq_eyebrow ?: "FAQ's" }}</span>
+      <h2 class="h-sec">{{ $home?->faq_title ?: 'frequently asked questions' }}</h2>
+      <p class="sub">{{ $home?->faq_sub ?: 'Delivering quality through every step of the process.' }}</p>
       <div class="faq-list" id="faqList">
         @foreach ($faqs as $faq)
         <div class="faq-item {{ $loop->first ? 'open' : '' }}">
@@ -209,6 +222,7 @@
         </div>
         @endforeach
       </div>
+      <a class="btn btn-orange" href="{{ url('/faq') }}" style="margin-top:24px;display:inline-flex">View all {!! $arrow !!}</a>
     </div>
     <div class="faq-img">
       <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="engineer">
@@ -223,9 +237,9 @@
   <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80')"></div>
   <div class="wrap">
     <div class="testi-left">
-      <span class="eyebrow">FAQ's</span>
-      <h2>frequently asked questions</h2>
-      <p>Our FAQ section is designed to provide clear answers to the most common questions our clients have about our construction services. From project planning and timelines to cost, materials, and quality assurance, we've covered everything you need to know to make informed decisions and feel confident throughout the building process.</p>
+      <span class="eyebrow">{{ $home?->testi_eyebrow ?: 'Testimonials' }}</span>
+      <h2>{{ $home?->testi_title ?: 'What our clients say' }}</h2>
+      <p>{{ $home?->testi_text ?: 'Our clients trust us to deliver quality construction on time. Here is what they have to say about working with Bandan Bhagwati Nirman Sewa.' }}</p>
       <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
     </div>
     <div class="testi-card">
@@ -249,10 +263,13 @@
 <!-- ===== BLOG ===== -->
 <section class="section" id="blog">
   <div class="wrap">
-    <span class="eyebrow">Our Blog</span>
+    <span class="eyebrow">{{ $home?->blog_eyebrow ?: 'Our Blog' }}</span>
     <div class="head-row">
-      <div><h2 class="h-sec">Insights &amp; Updates</h2><p class="sub">Explore expert insights, industry updates, and project stories from our team.</p></div>
-      <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      <div><h2 class="h-sec">{{ $home?->blog_title ?: 'Insights & Updates' }}</h2><p class="sub">{{ $home?->blog_sub ?: 'Explore expert insights, industry updates, and project stories from our team.' }}</p></div>
+      <div class="head-actions">
+        <a class="btn btn-orange" href="{{ url('/blog') }}">View all {!! $arrow !!}</a>
+        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </div>
     </div>
     <div class="grid4" id="blogGrid">
       @foreach ($posts as $post)
