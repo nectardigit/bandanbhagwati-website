@@ -401,7 +401,7 @@ button{font-family:inherit;cursor:pointer}
 img.cone{object-fit:contain}
 /* "10+ years" badge image (258x106) — across the top, over the photo boundary */
 .about-imgs .badge-img{
-  position:absolute;left: 380px;px;top: -40px;z-index:4;width:214px;height:auto;
+  position:absolute;left:380px;top:-40px;z-index:4;width:214px;height:auto;
   border-radius:14px;box-shadow:0 16px 30px rgba(11,79,168,.28)
 }
 /* SVG fallback badge (only shown when no badge image is set) */
@@ -581,6 +581,7 @@ img.cone{object-fit:contain}
 .footer{background:var(--blue);color:#fff;padding:70px 0 0;position:relative}
 .footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px}
 .footer .logo-box{background:#fff;border-radius:10px;padding:14px 18px;display:inline-flex;margin-bottom:22px}
+.footer .logo-box .logo-img{height:58px;max-width:240px;object-fit:contain}
 .footer .about-txt{color:#cdd9ef;font-size:15px;line-height:1.7;max-width:330px;margin:0 0 28px}
 .footer h5{font-size:18px;font-weight:700;margin:0 0 24px;position:relative;padding-bottom:10px}
 .footer h5::after{content:"";position:absolute;left:0;bottom:0;width:46px;height:3px;background:var(--orange)}

@@ -138,15 +138,19 @@
     <div>
       <div class="logo-box">
         <a class="logo" href="{{ url('/') }}">
-          <svg class="mark" viewBox="0 0 70 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 30a29 29 0 0 1 58 0H6z" fill="#1f9ad6"/>
-            <path d="M14 30a21 21 0 0 1 42 0H14z" fill="#0b4fa8"/>
-            <circle cx="35" cy="22" r="6" fill="#cfe9f7"/>
-            <rect x="10" y="34" width="50" height="6" rx="1" fill="#0b4fa8"/>
-            <path d="M16 40v12M54 40v12M22 52c0-4 4-7 7-7s7 3 7 7M34 52c0-4 4-7 7-7s7 3 7 7" stroke="#f5a000" stroke-width="4" stroke-linecap="round"/>
-            <rect x="26" y="44" width="18" height="8" fill="#f5a000"/>
-          </svg>
-          <span class="txt"><b>{{ $s['company_name'] ?? 'BANDAN BHAGWATI' }}</b><span>{{ $s['company_sub'] ?? 'NIRMAN SEWA PVT. LTD.' }}</span></span>
+          @if (!empty($s['logo_image']))
+            <img class="logo-img" src="{{ media($s['logo_image']) }}" alt="{{ $s['company_name'] ?? 'Bandan Bhagwati' }}">
+          @else
+            <svg class="mark" viewBox="0 0 70 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 30a29 29 0 0 1 58 0H6z" fill="#1f9ad6"/>
+              <path d="M14 30a21 21 0 0 1 42 0H14z" fill="#0b4fa8"/>
+              <circle cx="35" cy="22" r="6" fill="#cfe9f7"/>
+              <rect x="10" y="34" width="50" height="6" rx="1" fill="#0b4fa8"/>
+              <path d="M16 40v12M54 40v12M22 52c0-4 4-7 7-7s7 3 7 7M34 52c0-4 4-7 7-7s7 3 7 7" stroke="#f5a000" stroke-width="4" stroke-linecap="round"/>
+              <rect x="26" y="44" width="18" height="8" fill="#f5a000"/>
+            </svg>
+            <span class="txt"><b>{{ $s['company_name'] ?? 'BANDAN BHAGWATI' }}</b><span>{{ $s['company_sub'] ?? 'NIRMAN SEWA PVT. LTD.' }}</span></span>
+          @endif
         </a>
       </div>
       <p class="about-txt">{{ $s['footer_about'] ?? 'Bandan Bhagwati is a sacred celebration symbolizing unity, devotion, and cultural heritage.' }}</p>
