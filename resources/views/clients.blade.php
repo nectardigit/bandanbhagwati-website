@@ -6,9 +6,9 @@
 @section('content')
 <section class="section">
   <div class="wrap">
-    <span class="eyebrow">Our Clients</span>
-    <h2 class="h-sec">Trusted by Leading Organizations</h2>
-    <p class="sub" style="margin-bottom:46px">We are proud to have delivered infrastructure projects for government bodies, ministries, and leading organizations across Nepal.</p>
+    <span class="eyebrow">{{ $home?->clients_eyebrow ?: 'Our Clients' }}</span>
+    <h2 class="h-sec">{{ $home?->clients_title ?: 'Trusted by Leading Organizations' }}</h2>
+    <p class="sub" style="margin-bottom:46px">{{ $home?->clients_sub ?: 'We are proud to have delivered infrastructure projects for government bodies, ministries, and leading organizations across Nepal.' }}</p>
 
     <div class="clients-page-grid">
       @foreach ($clients as $cl)

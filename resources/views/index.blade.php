@@ -270,8 +270,8 @@
 <section class="section clients-sec">
   <div class="wrap">
     <div style="text-align:center;max-width:620px;margin:0 auto 40px">
-      <span class="eyebrow" style="justify-content:center">Our Clients</span>
-      <h2 class="h-sec">Trusted by Leading Organizations</h2>
+      <span class="eyebrow" style="justify-content:center">{{ $home?->clients_eyebrow ?: 'Our Clients' }}</span>
+      <h2 class="h-sec">{{ $home?->clients_title ?: 'Trusted by Leading Organizations' }}</h2>
     </div>
     @php($logoClients = $clients->filter(fn ($c) => ! empty($c->logo)))
     @php($textClients = $clients->filter(fn ($c) => empty($c->logo)))

@@ -65,6 +65,12 @@ class HomeContentForm
                     Textarea::make('testi_text')->label('Text')->rows(3),
                 ])->collapsible(),
 
+                Section::make('Our Clients')->schema([
+                    TextInput::make('clients_eyebrow')->label('Eyebrow'),
+                    TextInput::make('clients_title')->label('Title'),
+                    Textarea::make('clients_sub')->label('Description (shown on the Clients page)')->rows(2),
+                ])->collapsible(),
+
                 Section::make('Insights & Updates (blog)')->schema([
                     TextInput::make('blog_eyebrow')->label('Eyebrow'),
                     TextInput::make('blog_title')->label('Title'),
