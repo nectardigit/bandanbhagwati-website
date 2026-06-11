@@ -25,7 +25,12 @@ class ProjectForm
                     ->required()
                     ->unique(ignoreRecord: true),
                 TextInput::make('caption')->default('Building'),
-                TextInput::make('client'),
+                Select::make('client')
+                    ->options(fn () => \App\Models\Project::query()->whereNotNull('client')->where('client', '!=', '')->distinct()->orderBy('client')->pluck('client', 'client')->all())
+                    ->searchable()
+                    ->native(false)
+                    ->createOptionForm([TextInput::make('client')->label('New client')->required()])
+                    ->createOptionUsing(fn (array $data) => $data['client']),
                 Select::make('status')
                     ->options(['ongoing' => 'Ongoing', 'completed' => 'Completed'])
                     ->default('ongoing')

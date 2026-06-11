@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Faqs\Schemas;
 
+use App\Models\Faq;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
@@ -15,10 +17,13 @@ class FaqForm
             ->components([
                 TextInput::make('question')
                     ->required(),
-                TextInput::make('category')
-                    ->placeholder('e.g. General, Pricing, Process')
-                    ->datalist(fn () => \App\Models\Faq::query()->whereNotNull('category')->distinct()->pluck('category')->all())
-                    ->helperText('Optional — questions are grouped under this heading on the FAQ page.'),
+                Select::make('category')
+                    ->options(fn () => Faq::query()->whereNotNull('category')->where('category', '!=', '')->distinct()->orderBy('category')->pluck('category', 'category')->all())
+                    ->searchable()
+                    ->native(false)
+                    ->createOptionForm([TextInput::make('category')->label('New category')->required()])
+                    ->createOptionUsing(fn (array $data) => $data['category'])
+                    ->helperText('Questions are grouped under this heading on the FAQ page. Pick one or add a new one.'),
                 Textarea::make('answer')
                     ->required()
                     ->columnSpanFull(),
