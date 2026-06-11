@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\Client;
 use App\Models\Category;
 use App\Models\ContactSubmission;
 use App\Models\Equipment;
@@ -29,6 +30,7 @@ class SiteController extends Controller
             'testimonials' => Testimonial::where('is_active', true)->orderBy('sort')->get(),
             'faqs'         => Faq::where('is_active', true)->orderBy('sort')->get(),
             'posts'        => BlogPost::published()->latest('published_at')->take(4)->get(),
+            'clients'      => Client::where('is_active', true)->orderBy('sort')->get(),
         ]);
     }
 

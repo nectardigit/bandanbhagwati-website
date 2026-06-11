@@ -374,6 +374,18 @@ button{font-family:inherit;cursor:pointer}
 .team-dept{font-size:23px;font-weight:700;color:var(--blue);margin:42px 0 22px;padding-bottom:10px;border-bottom:2px solid var(--line)}
 .team-dept:first-of-type{margin-top:0}
 .team-grid+.team-dept{margin-top:46px}
+
+/* ===== Clients / partners ===== */
+.clients-sec{background:#f7f9fc}
+.client-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;align-items:stretch}
+.client-logo{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;display:flex;align-items:center;justify-content:center;min-height:112px;transition:.2s}
+.client-logo a{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.client-logo:hover{box-shadow:0 14px 30px rgba(15,19,32,.08);transform:translateY(-3px)}
+.client-logo img{max-width:100%;max-height:72px;object-fit:contain;filter:grayscale(1);opacity:.78;transition:.2s}
+.client-logo:hover img{filter:none;opacity:1}
+.client-logo span{font-weight:600;color:var(--muted);text-align:center;font-size:14px}
+@media(max-width:980px){.client-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.client-grid{grid-template-columns:repeat(2,1fr)}}
 .team-card{position:relative;border-radius:18px;overflow:hidden;height:300px;box-shadow:0 12px 28px rgba(15,19,32,.1)}
 .team-card img{width:100%;height:100%;object-fit:cover}
 .team-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,12,20,.85) 100%);opacity:0;transition:.3s}

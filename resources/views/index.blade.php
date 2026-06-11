@@ -260,6 +260,28 @@
 </section>
 @endif
 
+@if (!empty($clients) && $clients->count())
+<!-- ===== CLIENTS / PARTNERS ===== -->
+<section class="section clients-sec">
+  <div class="wrap">
+    <div style="text-align:center;max-width:620px;margin:0 auto 40px">
+      <span class="eyebrow" style="justify-content:center">Our Clients</span>
+      <h2 class="h-sec">Trusted by Leading Organizations</h2>
+    </div>
+    <div class="client-grid">
+      @foreach ($clients as $cl)
+        @php($logo = $cl->logo ? media($cl->logo) : '')
+        <div class="client-logo" title="{{ $cl->name }}">
+          @if ($cl->url)<a href="{{ $cl->url }}" target="_blank" rel="noopener">@endif
+            @if ($logo)<img loading="lazy" decoding="async" src="{{ $logo }}" alt="{{ $cl->name }}">@else<span>{{ $cl->name }}</span>@endif
+          @if ($cl->url)</a>@endif
+        </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
+
 <!-- ===== BLOG ===== -->
 <section class="section" id="blog">
   <div class="wrap">
