@@ -233,6 +233,7 @@ class ContentSeeder extends Seeder
             'support_url'    => '#',
             'talk_label'     => "Let's Talk",
             'talk_url'       => '/contact',
+            'favicon'       => '',
             'hero_video'    => '',
             'hero_image'    => '',
             'hero_kicker'   => 'We Developed Landmark Real Estate Projects.',

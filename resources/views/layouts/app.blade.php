@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{-- Favicon — uses the "favicon" setting, else the logo, else the static file --}}
+@php($faviconUrl = !empty($settings['favicon']) ? media($settings['favicon']) : (!empty($settings['logo_image']) ? media($settings['logo_image']) : asset('favicon.ico')))
+<link rel="icon" href="{{ $faviconUrl }}">
+<link rel="shortcut icon" href="{{ $faviconUrl }}">
+<link rel="apple-touch-icon" href="{{ $faviconUrl }}">
 {{-- Google Search Console verification — paste your code in Admin → Site Settings → google_verification --}}
 @if (!empty($settings['google_verification']))
 <meta name="google-site-verification" content="{{ $settings['google_verification'] }}">
