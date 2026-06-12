@@ -79,19 +79,4 @@
   </div>
 </section>
 
-@if ($team->count())
-<!-- ===== TEAM / WORK IN ACTION ===== -->
-<section class="section" style="padding-top:20px">
-  <div class="wrap">
-    <span class="eyebrow">Our Ongoing Project</span>
-    <h2 class="h-sec" style="margin-bottom:8px">Work in Action</h2>
-    <p class="sub" style="margin-bottom:40px">Delivering quality through every step of the process.</p>
-    <div class="team-row" id="teamRow">
-      @foreach ($team as $m)
-        <img loading="lazy" decoding="async" src="{{ media($m->photo) }}" alt="{{ $m->name }}">
-      @endforeach
-    </div>
-  </div>
-</section>
-@endif
 @endsection
