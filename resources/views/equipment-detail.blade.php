@@ -31,16 +31,17 @@
       </div>
 
       <div class="rating-card">
-        <div class="score">4.8</div>
-        <div class="rev">5k + Review</div>
+        <div class="score">{{ $equipment->rating ? number_format($equipment->rating, 1) : '4.8' }}</div>
+        <div class="rev">{{ $equipment->reviews_label ?: '5k' }} + Review</div>
         <div class="clients">
+          @if ($reviewers->count())
           <div class="avatars">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" alt="">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" alt="">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=80" alt="">
+            @foreach ($reviewers as $rv)
+              <img src="{{ media($rv->photo) }}" alt="{{ $rv->name }}" title="{{ $rv->name }}">
+            @endforeach
           </div>
-          <div><b>25,00+</b><span>Our Client</span></div>
+          @endif
+          <div><b>{{ $clientCount }}+</b><span>{{ $clientCount == 1 ? 'Our Client' : 'Our Clients' }}</span></div>
         </div>
         <div class="anytime">
           <span class="bi">🏗️</span>

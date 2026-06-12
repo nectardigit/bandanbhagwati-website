@@ -20,6 +20,8 @@ class EquipmentForm
                     ->required(),
                 TextInput::make('title')->label('Card heading'),
                 TextInput::make('price')->label('Rental price')->placeholder('e.g. Rs. 15,000 / day'),
+                TextInput::make('rating')->label('Rating (0–5)')->numeric()->minValue(0)->maxValue(5)->step(0.1)->placeholder('4.8')->helperText('Shown on the rental page. Blank = 4.8'),
+                TextInput::make('reviews_label')->label('Reviews label')->placeholder('5k')->helperText('Shown as "… + Review". Blank = 5k'),
                 Textarea::make('description')
                     ->columnSpanFull(),
                 FileManagerPicker::make('image')
