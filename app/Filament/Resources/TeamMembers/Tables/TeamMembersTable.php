@@ -14,34 +14,22 @@ class TeamMembersTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->reorderable('sort')
+            ->defaultSort('sort')
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->weight('bold'),
                 TextColumn::make('role')
                     ->searchable(),
-                TextColumn::make('photo')
+                TextColumn::make('department')
+                    ->badge()
                     ->searchable(),
-                TextColumn::make('facebook')
-                    ->searchable(),
-                TextColumn::make('instagram')
-                    ->searchable(),
-                TextColumn::make('twitter')
-                    ->searchable(),
-                TextColumn::make('linkedin')
-                    ->searchable(),
-                TextColumn::make('youtube')
-                    ->searchable(),
+                IconColumn::make('is_active')
+                    ->label('Active')
+                    ->boolean(),
                 TextColumn::make('sort')
                     ->numeric()
-                    ->sortable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
