@@ -97,7 +97,8 @@ class SiteController extends Controller
             'name'    => ['required', 'string', 'max:255'],
             'email'   => ['required', 'email', 'max:255'],
             'phone'   => ['nullable', 'string', 'max:50'],
-            'message' => ['nullable', 'string'],
+            'message' => ['nullable', 'string', 'max:5000'],
+            'captcha' => ['required', $this->captchaRule($request)],
         ]);
 
         $submission = ContactSubmission::create([
@@ -246,9 +247,11 @@ class SiteController extends Controller
             'city'    => ['nullable', 'string', 'max:255'],
             'phone'   => ['nullable', 'string', 'max:50'],
             'subject' => ['nullable', 'string', 'max:255'],
-            'message' => ['required', 'string'],
+            'message' => ['required', 'string', 'min:10', 'max:5000'],
+            'captcha' => ['required', $this->captchaRule($request)],
         ]);
 
+        unset($data['captcha']);
         $submission = ContactSubmission::create($data);
 
         $to = \App\Models\SiteSetting::get('notify_email', env('MAIL_ADMIN_ADDRESS', 'admin@nectardigit.com'));
@@ -262,6 +265,23 @@ class SiteController extends Controller
         }
 
         return back()->with('contact_success', 'Thank you! Your message has been sent.');
+    }
+
+    /** Stateless math-captcha rule: the expected answer is encrypted into a hidden field. */
+    private function captchaRule(Request $request): \Closure
+    {
+        return function ($attribute, $value, $fail) use ($request) {
+            try {
+                $expected = (int) decrypt($request->input('captcha_token'));
+            } catch (\Throwable $e) {
+                $fail('The security check expired — please answer the new question.');
+
+                return;
+            }
+            if ((int) $value !== $expected) {
+                $fail('The answer to the security question is incorrect.');
+            }
+        };
     }
 
     public function newsletterSubmit(Request $request)

@@ -52,17 +52,18 @@
       <div class="rent-form" id="rentForm">
         <h3>Rent this equipment</h3>
         @if (session('enquiry_success'))
-          <p class="ok">{{ session('enquiry_success') }}</p>
+          <p class="form-ok">{{ session('enquiry_success') }}</p>
         @endif
         @if ($errors->any())
-          <p class="err">{{ $errors->first() }}</p>
+          <div class="form-err"><ul>@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
         @endif
         <form method="POST" action="{{ route('equipment.enquiry', $equipment) }}">
           @csrf
-          <input type="text" name="name" placeholder="Your name" value="{{ old('name') }}" required>
-          <input type="email" name="email" placeholder="Your email" value="{{ old('email') }}" required>
-          <input type="text" name="phone" placeholder="Phone number" value="{{ old('phone') }}">
-          <textarea name="message" rows="3" placeholder="Message (optional)">{{ old('message') }}</textarea>
+          <input type="text" name="name" placeholder="Your name" value="{{ old('name') }}" required maxlength="255" class="@error('name') invalid @enderror">
+          <input type="email" name="email" placeholder="Your email" value="{{ old('email') }}" required maxlength="255" class="@error('email') invalid @enderror">
+          <input type="tel" name="phone" placeholder="Phone number" value="{{ old('phone') }}" pattern="[0-9+\-\s()]{7,}" maxlength="50" class="@error('phone') invalid @enderror">
+          <textarea name="message" rows="3" placeholder="Message (optional)" maxlength="5000" class="@error('message') invalid @enderror">{{ old('message') }}</textarea>
+          @include('partials.captcha')
           <button class="btn btn-orange" type="submit" style="width:100%;justify-content:center">Send enquiry {!! $arrow !!}</button>
         </form>
       </div>

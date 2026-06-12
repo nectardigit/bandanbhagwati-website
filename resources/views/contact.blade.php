@@ -42,21 +42,22 @@
       <h3>Get in Touch</h3>
       <p class="lead">Have a question or feedback? Fill out the form below and we'll get back to you soon.</p>
       @if (session('contact_success'))
-        <p style="color:#0b8a3a;font-weight:600">{{ session('contact_success') }}</p>
+        <p class="form-ok">{{ session('contact_success') }}</p>
       @endif
       @if ($errors->any())
-        <p style="color:#c0392b">{{ $errors->first() }}</p>
+        <div class="form-err"><ul>@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
       @endif
       <div class="row2">
-        <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter your full name" required>
-        <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required>
+        <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter your full name" required maxlength="255" class="@error('name') invalid @enderror">
+        <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" required maxlength="255" class="@error('email') invalid @enderror">
       </div>
       <div class="row2">
-        <input type="text" name="city" value="{{ old('city') }}" placeholder="Enter your city">
-        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="Phone number">
+        <input type="text" name="city" value="{{ old('city') }}" placeholder="Enter your city" maxlength="255" class="@error('city') invalid @enderror">
+        <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="Phone number" pattern="[0-9+\-\s()]{7,}" maxlength="50" class="@error('phone') invalid @enderror">
       </div>
-      <div class="full"><input type="text" name="subject" value="{{ old('subject') }}" placeholder="Subject"></div>
-      <div class="full"><textarea name="message" placeholder="Message" required>{{ old('message') }}</textarea></div>
+      <div class="full"><input type="text" name="subject" value="{{ old('subject') }}" placeholder="Subject" maxlength="255" class="@error('subject') invalid @enderror"></div>
+      <div class="full"><textarea name="message" placeholder="Message" required minlength="10" maxlength="5000" class="@error('message') invalid @enderror">{{ old('message') }}</textarea></div>
+      <div class="full">@include('partials.captcha')</div>
       <button class="btn btn-orange" type="submit">Send message</button>
     </form>
   </div>
