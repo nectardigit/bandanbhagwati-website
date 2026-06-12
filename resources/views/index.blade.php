@@ -147,27 +147,7 @@
   </div>
 </section>
 
-<!-- ===== OUR PROJECT ===== -->
-<section class="section" id="projects">
-  <div class="wrap">
-    <span class="eyebrow">{{ $home?->projects_eyebrow ?: 'Our Project' }}</span>
-    <div class="head-row">
-      <div><h2 class="h-sec">{{ $home?->projects_title ?: 'Showcasing Our Work' }}</h2><p class="sub">{{ $home?->projects_sub ?: "Our clients' feedback speaks volumes about our commitment and quality." }}</p></div>
-      <div class="head-actions">
-        <a class="btn btn-orange" href="{{ url('/project') }}">View all {!! $arrow !!}</a>
-        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
-      </div>
-    </div>
-    <div class="proj-grid h-scroll" id="projGrid">
-      @foreach ($projects as $p)
-      <a class="proj-card" href="{{ route('projects.show', $p) }}">
-        <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
-        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
-      </a>
-      @endforeach
-    </div>
-  </div>
-</section>
+{{-- "Showcasing Our Work" (completed) section hidden — the "Work in Action" section below now toggles Ongoing/Completed. --}}
 
 <!-- ===== ONGOING PROJECT ===== -->
 <section class="section ongoing">
