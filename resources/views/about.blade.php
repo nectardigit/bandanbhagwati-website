@@ -31,7 +31,7 @@
       @foreach ($aboutFeatures as $f)
       <div class="feat">
         <span class="ck"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
-        <div><h4>{{ $f['title'] ?? '' }}</h4><p>{{ $f['text'] ?? '' }}</p></div>
+        <div><h4>{{ $f['title'] ?? '' }}</h4>@include('partials.feat-text', ['text' => $f['text'] ?? ''])</div>
       </div>
       @endforeach
       <div class="about-cards">

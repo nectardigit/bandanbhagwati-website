@@ -393,6 +393,11 @@ button{font-family:inherit;cursor:pointer}
 .team-dept:first-of-type{margin-top:0}
 .team-grid+.team-dept{margin-top:46px}
 
+/* Bulleted feature text (Vision, Core Values, etc.) */
+.feat-list{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.feat-list li{position:relative;padding-left:24px;color:var(--muted);line-height:1.55}
+.feat-list li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+
 /* ===== About features "see more" collapse ===== */
 .about-feats{position:relative;overflow:hidden;transition:max-height .45s ease}
 .about-feats:not(.open){max-height:330px}
