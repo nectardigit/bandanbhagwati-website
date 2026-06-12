@@ -158,6 +158,20 @@ class SiteController extends Controller
         ]);
     }
 
+    public function gallery()
+    {
+        return view('gallery', [
+            'albums' => \App\Models\Album::where('is_active', true)->orderBy('sort')->get(),
+        ]);
+    }
+
+    public function albumShow(\App\Models\Album $album)
+    {
+        abort_unless($album->is_active, 404);
+
+        return view('album', ['album' => $album]);
+    }
+
     public function blog()
     {
         return view('blog', [

@@ -1,5 +1,34 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
+/* ---- Photo album lightbox ---- */
+(function () {
+  const grid = document.getElementById("albumGrid");
+  const lb = document.getElementById("lightbox");
+  if (!grid || !lb) return;
+  const img = document.getElementById("lbImg");
+  const counter = document.getElementById("lbCounter");
+  const thumbs = Array.from(grid.querySelectorAll(".photo-thumb"));
+  let idx = 0;
+  const show = i => {
+    idx = (i + thumbs.length) % thumbs.length;
+    img.src = thumbs[idx].dataset.full;
+    counter.textContent = (idx + 1) + " / " + thumbs.length;
+  };
+  const open = i => { show(i); lb.classList.add("open"); lb.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; };
+  const close = () => { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; };
+  thumbs.forEach((t, i) => t.addEventListener("click", () => open(i)));
+  document.getElementById("lbClose").addEventListener("click", close);
+  document.getElementById("lbPrev").addEventListener("click", () => show(idx - 1));
+  document.getElementById("lbNext").addEventListener("click", () => show(idx + 1));
+  lb.addEventListener("click", e => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") show(idx - 1);
+    else if (e.key === "ArrowRight") show(idx + 1);
+  });
+})();
+
 /* ---- Section carousels: prev/next arrows scroll the .h-scroll track ---- */
 document.querySelectorAll(".arrows").forEach(arrows => {
   const sec = arrows.closest("section");

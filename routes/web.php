@@ -22,6 +22,9 @@ Route::get('/team', [SiteController::class, 'team'])->name('team');
 
 Route::get('/clients', [SiteController::class, 'clients'])->name('clients');
 
+Route::get('/gallery', [SiteController::class, 'gallery'])->name('gallery');
+Route::get('/gallery/{album}', [SiteController::class, 'albumShow'])->name('gallery.show');
+
 Route::get('/blog', [SiteController::class, 'blog'])->name('blog');
 Route::get('/blog/{blogPost}', [SiteController::class, 'blogShow'])->name('blog.show');
 
