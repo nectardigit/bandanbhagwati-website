@@ -56,9 +56,11 @@ class SiteController extends Controller
         abort_unless($service->is_active, 404);
 
         return view('service-detail', [
-            'service' => $service,
-            'more'    => Service::where('is_active', true)->where('id', '!=', $service->id)->orderBy('sort')->take(6)->get(),
-            'faqs'    => Faq::where('is_active', true)->orderBy('sort')->get(),
+            'service'     => $service,
+            'more'        => Service::where('is_active', true)->where('id', '!=', $service->id)->orderBy('sort')->take(6)->get(),
+            'faqs'        => Faq::where('is_active', true)->orderBy('sort')->get(),
+            'reviewers'   => Testimonial::where('is_active', true)->whereNotNull('photo')->where('photo', '!=', '')->orderBy('sort')->take(5)->get(),
+            'clientCount' => Testimonial::where('is_active', true)->count(),
         ]);
     }
 
