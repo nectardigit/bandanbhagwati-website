@@ -124,20 +124,19 @@ document.querySelectorAll(".faq-list").forEach(faqList => {
   sync();
 });
 
-/* ---- Project Ongoing / Completed toggle (project page) ---- */
-const projToggle = document.querySelector(".proj-toggle");
-if (projToggle) {
-  const grid = document.getElementById("projGrid");
+/* ---- Project Ongoing / Completed toggle (project page + home "Work in Action") ---- */
+document.querySelectorAll(".proj-toggle").forEach(projToggle => {
+  const section = projToggle.closest("section");
+  if (!section) return;
+  const grid = section.querySelector(".proj-grid");
   const tabs = projToggle.querySelectorAll("button");
   const crumb = document.getElementById("projCrumb");
-  const eyebrow = document.getElementById("projEyebrow");
-  const labels = { ongoing: "Ongoing", completed: "Completed" };
+  const eyebrow = section.querySelector(".eyebrow");
   const apply = set => {
-    const name = labels[set] || "Ongoing";
+    const name = set === "completed" ? "Completed" : "Ongoing";
     if (crumb) crumb.textContent = name + " project";
-    if (eyebrow) eyebrow.textContent = name + " Project";
-    if (!grid) return;
-    grid.querySelectorAll(".proj-card").forEach(card => {
+    if (eyebrow) eyebrow.textContent = eyebrow.id === "projEyebrow" ? (name + " Project") : ("Our " + name + " Project");
+    if (grid) grid.querySelectorAll(".proj-card").forEach(card => {
       card.style.display = (card.dataset.set === set) ? "" : "none";
     });
   };
@@ -148,7 +147,7 @@ if (projToggle) {
   }));
   const initial = projToggle.querySelector("button.active");
   apply(initial ? initial.dataset.set : "ongoing");
-}
+});
 
 /* ---- Equipment category filter (equipment list page) ---- */
 const equipFilter = document.querySelector(".equip-filter");
