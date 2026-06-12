@@ -10,8 +10,8 @@
 <section class="section">
   <div class="wrap">
     <span class="eyebrow">Our Team</span>
-    <h2 class="h-sec">Meet the Team</h2>
-    <p class="sub" style="margin-bottom:44px">The experienced board, engineers, and professionals behind Bandan Bhagwati Nirman Sewa.</p>
+    <h2 class="h-sec">{{ $home?->team_page_title ?: 'Meet the Team' }}</h2>
+    <p class="sub" style="margin-bottom:44px">{{ $home?->team_page_desc ?: 'The experienced board, engineers, and professionals behind Bandan Bhagwati Nirman Sewa.' }}</p>
 
     @php($grouped = $members->groupBy(fn ($m) => $m->department ?: 'Our Team'))
     @foreach ($grouped as $department => $group)

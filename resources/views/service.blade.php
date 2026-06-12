@@ -29,8 +29,8 @@
 <section class="section">
   <div class="wrap">
     <span class="eyebrow">Our Services</span>
-    <h2 class="h-sec">Solutions We Provide</h2>
-    <p class="sub" style="margin-bottom:46px">Comprehensive solutions designed to meet your goals.</p>
+    <h2 class="h-sec">{{ $home?->service_page_title ?: 'Solutions We Provide' }}</h2>
+    <p class="sub" style="margin-bottom:46px">{{ $home?->service_page_desc ?: 'Comprehensive solutions designed to meet your goals.' }}</p>
     <div class="svc-grid" id="svcGrid">
       @foreach ($solutions as $sol)
       <a class="svc-card" href="{{ route('services.show', $sol) }}">

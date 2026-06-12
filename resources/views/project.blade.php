@@ -21,8 +21,8 @@
     <div class="head-row" style="align-items:center">
       <div>
         <span class="eyebrow" id="projEyebrow">Ongoing Project</span>
-        <h2 class="h-sec" style="margin-bottom:6px">Showcasing Our Work</h2>
-        <p class="sub">Our clients' feedback speaks volumes about our commitment and quality.</p>
+        <h2 class="h-sec" style="margin-bottom:6px">{{ $home?->project_page_title ?: 'Showcasing Our Work' }}</h2>
+        <p class="sub">{{ $home?->project_page_desc ?: "Our clients' feedback speaks volumes about our commitment and quality." }}</p>
       </div>
       <div class="proj-toggle">
         <button class="active" data-set="ongoing">Ongoing</button>

@@ -65,6 +65,19 @@ class HomeContentForm
                     Textarea::make('testi_text')->label('Text')->rows(3),
                 ])->collapsible(),
 
+                Section::make('Page Headers — Services / Equipment / Projects / Team')
+                    ->description('Title and description shown at the top of each listing page. Leave blank to keep the current text.')
+                    ->schema([
+                        TextInput::make('service_page_title')->label('Services — title')->placeholder('Solutions We Provide'),
+                        Textarea::make('service_page_desc')->label('Services — description')->rows(2),
+                        TextInput::make('equipment_page_title')->label('Equipment — title')->placeholder('Equipment for Rent'),
+                        Textarea::make('equipment_page_desc')->label('Equipment — description')->rows(2),
+                        TextInput::make('project_page_title')->label('Projects — title')->placeholder('Showcasing Our Work'),
+                        Textarea::make('project_page_desc')->label('Projects — description')->rows(2),
+                        TextInput::make('team_page_title')->label('Team — title')->placeholder('Meet the Team'),
+                        Textarea::make('team_page_desc')->label('Team — description')->rows(2),
+                    ])->collapsible(),
+
                 Section::make('Our Clients')->schema([
                     TextInput::make('clients_eyebrow')->label('Eyebrow'),
                     TextInput::make('clients_title')->label('Title'),

@@ -19,8 +19,8 @@
 <section class="section">
   <div class="wrap">
     <span class="eyebrow">Our Fleet</span>
-    <h2 class="h-sec">Equipment for Rent</h2>
-    <p class="sub" style="margin-bottom:30px">Browse our extensive collection of well-maintained construction equipment.</p>
+    <h2 class="h-sec">{{ $home?->equipment_page_title ?: 'Equipment for Rent' }}</h2>
+    <p class="sub" style="margin-bottom:30px">{{ $home?->equipment_page_desc ?: 'Browse our extensive collection of well-maintained construction equipment.' }}</p>
     @if ($categories->count())
     <div class="equip-filter">
       <button class="{{ ($activeCat ?? null) ? '' : 'active' }}" data-cat="all">All</button>
