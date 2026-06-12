@@ -43,42 +43,6 @@
   </div>
 </section>
 
-<!-- ===== SERVICES ===== -->
-<section class="section services" id="services">
-  <div class="wrap">
-    <div class="serv-left">
-      <span class="eyebrow">Services</span>
-      <h2>Trusted Construction Services for Every Client</h2>
-      <p class="sub">Delivering reliable, innovative, and high-quality construction solutions tailored to every client's needs. Committed to excellence with services designed to build trust and lasting value.</p>
-      <div class="serv-list" id="servList">
-        @foreach ($services as $service)
-        <div class="serv-item {{ $loop->first ? 'active' : '' }}"
-             data-title="{{ $service->title }}"
-             data-desc="{{ $service->short_description }}"
-             data-image="{{ $service->image ? media($service->image) : '' }}"
-             data-url="{{ route('services.show', $service) }}">
-          <span>{{ $service->title }}</span>
-          <span class="dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
-        </div>
-        @endforeach
-      </div>
-    </div>
-    @php($firstSvc = $services->first())
-    <div class="serv-right">
-      <div style="text-align:right;margin-bottom:20px"><a href="{{ url('/service') }}" class="view-more">View more <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-      <div class="serv-card">
-        <div class="serv-media">
-          <img loading="lazy" decoding="async" src="{{ $firstSvc && $firstSvc->image ? media($firstSvc->image) : 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80' }}" alt="service">
-          <button class="btn btn-orange" onclick="location.href='{{ $firstSvc ? route('services.show', $firstSvc) : url('/service') }}'">Explore now {!! $arrow !!}</button>
-        </div>
-        <div class="body">
-          <h3>{{ $firstSvc->title ?? 'Trusted Construction Services' }}</h3>
-          <p>{{ $firstSvc->short_description ?? 'Delivering reliable, innovative, and high-quality construction solutions tailored to every client\'s needs.' }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===== STATS ===== -->
 <section class="stats">
