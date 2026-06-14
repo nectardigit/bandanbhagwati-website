@@ -74,7 +74,7 @@ button{font-family:inherit;cursor:pointer}
 @media(max-width:600px){.h-scroll>*{flex:0 0 84%}}
 
 /* ===== Top bar ===== */
-.topbar{background:var(--orange);color:#fff;font-size:14.5px;font-weight:500}
+.topbar{background:#01a0c7;color:#fff;font-size:14.5px;font-weight:500}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:46px}
 .topbar .left,.topbar .right{display:flex;align-items:center;gap:28px}
 .topbar .item{display:flex;align-items:center;gap:8px}
