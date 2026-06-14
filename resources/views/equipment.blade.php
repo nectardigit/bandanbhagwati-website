@@ -37,7 +37,7 @@
           <h3>{{ $e->title ?: $e->name }}</h3>
           @if ($e->price)<p style="color:var(--orange);font-weight:700;margin:0 0 6px">{{ $e->price }}</p>@endif
           <p>{{ $e->description }}</p>
-          <a class="btn btn-orange" href="{{ route('equipment.show', $e) }}">Rent Now {!! $arrow !!}</a>
+          <a class="btn btn-orange" href="{{ route('equipment.show', $e) }}">Read more {!! $arrow !!}</a>
         </div>
       </article>
       @endforeach
