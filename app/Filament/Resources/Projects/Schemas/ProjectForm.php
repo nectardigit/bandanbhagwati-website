@@ -24,7 +24,25 @@ class ProjectForm
                 TextInput::make('slug')
                     ->required()
                     ->unique(ignoreRecord: true),
-                TextInput::make('caption')->default('Building'),
+                Select::make('project_category_id')
+                    ->label('Category')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->native(false)
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                        TextInput::make('slug')->required(),
+                    ])
+                    ->editOptionForm([
+                        TextInput::make('name')->required(),
+                        TextInput::make('slug')->required(),
+                    ])
+                    ->helperText('Pick a category, or create/edit one inline. Manage all categories under "Project Categories".'),
+                TextInput::make('caption')->label('Card label (small text)')->default('Building'),
                 Select::make('client')
                     ->options(fn () => \App\Models\Project::query()->whereNotNull('client')->where('client', '!=', '')->distinct()->orderBy('client')->pluck('client', 'client')->all())
                     ->searchable()

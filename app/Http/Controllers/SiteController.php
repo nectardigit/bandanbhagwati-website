@@ -129,8 +129,9 @@ class SiteController extends Controller
     public function projects()
     {
         return view('project', [
-            'ongoing'   => Project::where('is_active', true)->where('status', 'ongoing')->orderBy('sort')->get(),
-            'completed' => Project::where('is_active', true)->where('status', 'completed')->orderBy('sort')->get(),
+            'ongoing'    => Project::with('category')->where('is_active', true)->where('status', 'ongoing')->orderBy('sort')->get(),
+            'completed'  => Project::with('category')->where('is_active', true)->where('status', 'completed')->orderBy('sort')->get(),
+            'categories' => \App\Models\ProjectCategory::where('is_active', true)->withCount(['projects' => fn ($q) => $q->where('is_active', true)])->having('projects_count', '>', 0)->orderBy('sort')->get(),
         ]);
     }
 

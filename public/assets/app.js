@@ -124,29 +124,42 @@ document.querySelectorAll(".faq-list").forEach(faqList => {
   sync();
 });
 
-/* ---- Project Ongoing / Completed toggle (project page + home "Work in Action") ---- */
+/* ---- Project Ongoing/Completed toggle + Category filter (project page + home "Work in Action") ---- */
 document.querySelectorAll(".proj-toggle").forEach(projToggle => {
   const section = projToggle.closest("section");
   if (!section) return;
   const grid = section.querySelector(".proj-grid");
   const tabs = projToggle.querySelectorAll("button");
+  const catFilter = section.querySelector(".proj-cat-filter");
   const crumb = document.getElementById("projCrumb");
   const eyebrow = section.querySelector(".eyebrow");
-  const apply = set => {
-    const name = set === "completed" ? "Completed" : "Ongoing";
+  let curStatus = "ongoing";
+  let curCat = "all";
+  const render = () => {
+    const name = curStatus === "completed" ? "Completed" : "Ongoing";
     if (crumb) crumb.textContent = name + " project";
     if (eyebrow) eyebrow.textContent = eyebrow.id === "projEyebrow" ? (name + " Project") : ("Our " + name + " Project");
     if (grid) grid.querySelectorAll(".proj-card").forEach(card => {
-      card.style.display = (card.dataset.set === set) ? "" : "none";
+      const okStatus = card.dataset.set === curStatus;
+      const okCat = curCat === "all" || card.dataset.cat === curCat;
+      card.style.display = (okStatus && okCat) ? "" : "none";
     });
   };
   tabs.forEach(t => t.addEventListener("click", () => {
     tabs.forEach(x => x.classList.remove("active"));
     t.classList.add("active");
-    apply(t.dataset.set);
+    curStatus = t.dataset.set;
+    render();
+  }));
+  if (catFilter) catFilter.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    catFilter.querySelectorAll("button").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    curCat = b.dataset.cat;
+    render();
   }));
   const initial = projToggle.querySelector("button.active");
-  apply(initial ? initial.dataset.set : "ongoing");
+  curStatus = initial ? initial.dataset.set : "ongoing";
+  render();
 });
 
 /* ---- Equipment category filter (equipment list page) ---- */

@@ -29,18 +29,26 @@
         <button data-set="completed">Completed</button>
       </div>
     </div>
+    @if ($categories->count())
+    <div class="proj-cat-filter equip-filter" style="margin:18px 0 4px">
+      <button class="active" data-cat="all">All</button>
+      @foreach ($categories as $cat)
+        <button data-cat="{{ $cat->slug }}">{{ $cat->name }}</button>
+      @endforeach
+    </div>
+    @endif
     <div class="proj-grid" id="projGrid" style="row-gap:48px;margin-top:10px">
       @foreach ($ongoing as $p)
-      <a class="proj-card" data-set="ongoing" href="{{ route('projects.show', $p) }}">
+      <a class="proj-card" data-set="ongoing" data-cat="{{ $p->category->slug ?? '' }}" href="{{ route('projects.show', $p) }}">
         <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
-        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
+        <div class="cap"><small>{{ $p->category->name ?? $p->caption }}</small><b>{{ $p->client }}</b></div>
         <span class="more">Explore more {!! $arrow2 !!}</span>
       </a>
       @endforeach
       @foreach ($completed as $p)
-      <a class="proj-card" data-set="completed" href="{{ route('projects.show', $p) }}">
+      <a class="proj-card" data-set="completed" data-cat="{{ $p->category->slug ?? '' }}" href="{{ route('projects.show', $p) }}">
         <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
-        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
+        <div class="cap"><small>{{ $p->category->name ?? $p->caption }}</small><b>{{ $p->client }}</b></div>
         <span class="more">Explore more {!! $arrow2 !!}</span>
       </a>
       @endforeach
