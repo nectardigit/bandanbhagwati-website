@@ -19,9 +19,37 @@ use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
-    public function home()
+    /** All configured hero videos (the hero_videos list, else the single hero_video). */
+    private function heroVideos(): array
     {
+        $list = [];
+        $multi = \App\Models\SiteSetting::get('hero_videos');
+        if ($multi) {
+            $decoded = is_array($multi) ? $multi : json_decode($multi, true);
+            if (is_array($decoded)) {
+                $list = array_values(array_filter($decoded));
+            }
+        }
+        if (! $list && ($single = \App\Models\SiteSetting::get('hero_video'))) {
+            $list = [$single];
+        }
+
+        return $list;
+    }
+
+    public function home(Request $request)
+    {
+        // Rotate to the next hero video on each page load.
+        $heroVideos = $this->heroVideos();
+        $heroVideoPath = null;
+        if ($heroVideos) {
+            $idx = ((int) $request->session()->get('hero_vid_idx', 0)) % count($heroVideos);
+            $heroVideoPath = $heroVideos[$idx];
+            $request->session()->put('hero_vid_idx', $idx + 1);
+        }
+
         return view('index', [
+            'heroVideoPath' => $heroVideoPath,
             'equipment'    => Equipment::where('is_active', true)->orderBy('sort')->take(12)->get(),
             'categories'   => Category::where('is_active', true)->orderBy('sort')->take(8)->get(),
             'services'     => Service::where('is_active', true)->where('show_in_accordion', true)->orderBy('sort')->get(),

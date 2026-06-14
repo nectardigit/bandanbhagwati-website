@@ -8,7 +8,7 @@
 
 <!-- ===== HERO ===== -->
 @php($heroImage = ($settings['hero_image'] ?? null) ? media($settings['hero_image']) : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80')
-@php($heroVideo = ($settings['hero_video'] ?? null) ? media($settings['hero_video']) : null)
+@php($heroVideo = ! empty($heroVideoPath) ? media($heroVideoPath) : (($settings['hero_video'] ?? null) ? media($settings['hero_video']) : null))
 <section class="hero">
   @if ($heroVideo)
     <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ $heroImage }}"

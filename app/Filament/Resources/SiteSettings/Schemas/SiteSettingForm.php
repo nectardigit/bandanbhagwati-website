@@ -10,25 +10,42 @@ use Illuminate\Support\Str;
 
 class SiteSettingForm
 {
-    /** Setting keys whose value is a media file (use the File Manager picker). */
+    /** Plural media keys (e.g. hero_videos, hero_images) → pick MANY files. */
+    private static function isMulti($record): bool
+    {
+        return $record && Str::contains($record->key, ['videos', 'images', 'galleries']);
+    }
+
+    /** Setting keys whose value is a single media file (use the File Manager picker). */
     private static function isMedia($record): bool
     {
-        return $record && Str::contains($record->key, ['image', 'video', 'photo', 'logo', 'icon']);
+        return $record && ! self::isMulti($record) && Str::contains($record->key, ['image', 'video', 'photo', 'logo', 'icon']);
     }
 
     public static function configure(Schema $schema): Schema
     {
+        $isMulti = fn ($record) => self::isMulti($record);
         $isMedia = fn ($record) => self::isMedia($record);
-        $isText  = fn ($record) => ! self::isMedia($record);
+        $isText  = fn ($record) => ! self::isMedia($record) && ! self::isMulti($record);
 
         return $schema
             ->components([
                 TextInput::make('key')
                     ->required()
                     ->disabledOn('edit')
-                    ->helperText('e.g. phone, email, address, social_facebook, stat_awards, hero_title, hero_video'),
+                    ->helperText('e.g. phone, email, address, hero_title, hero_video, hero_videos (multiple)'),
 
-                // Media keys (…image / …video / …photo / …logo / …icon) → File Manager picker.
+                // Plural media keys (hero_videos / hero_images) → pick multiple files (stored as JSON).
+                FileManagerPicker::make('value')
+                    ->label('Files — pick multiple (rotates on the site)')
+                    ->multiple()
+                    ->visible($isMulti)
+                    ->dehydrated($isMulti)
+                    ->formatStateUsing(fn ($state) => is_array($state) ? $state : (json_decode((string) $state, true) ?: []))
+                    ->dehydrateStateUsing(fn ($state) => json_encode(array_values(array_filter((array) $state))))
+                    ->columnSpanFull(),
+
+                // Single media keys (…image / …video / …photo / …logo / …icon) → File Manager picker.
                 FileManagerPicker::make('value')
                     ->label('File (pick from File Manager)')
                     ->visible($isMedia)
