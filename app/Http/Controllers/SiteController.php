@@ -186,6 +186,20 @@ class SiteController extends Controller
         return view('album', ['album' => $album]);
     }
 
+    public function videos()
+    {
+        return view('videos', [
+            'albums' => \App\Models\VideoAlbum::where('is_active', true)->orderBy('sort')->get(),
+        ]);
+    }
+
+    public function videoAlbumShow(\App\Models\VideoAlbum $videoAlbum)
+    {
+        abort_unless($videoAlbum->is_active, 404);
+
+        return view('video-album', ['album' => $videoAlbum]);
+    }
+
     public function blog()
     {
         return view('blog', [

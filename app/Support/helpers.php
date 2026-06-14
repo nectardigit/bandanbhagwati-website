@@ -40,6 +40,28 @@ if (! function_exists('og_url')) {
     }
 }
 
+if (! function_exists('video_embed')) {
+    /**
+     * Resolve a video URL (YouTube, Vimeo, or direct file) to embed/thumbnail data.
+     *
+     * @return array{type:string, embed:?string, thumb:?string}
+     */
+    function video_embed(?string $url): array
+    {
+        $url = trim((string) $url);
+
+        if ($url !== '' && preg_match('~(?:youtube\.com/(?:watch\?v=|embed/|shorts/|live/)|youtu\.be/)([A-Za-z0-9_-]{6,})~', $url, $m)) {
+            return ['type' => 'youtube', 'embed' => 'https://www.youtube.com/embed/'.$m[1].'?rel=0&autoplay=1', 'thumb' => 'https://img.youtube.com/vi/'.$m[1].'/hqdefault.jpg'];
+        }
+
+        if ($url !== '' && preg_match('~vimeo\.com/(?:video/)?(\d+)~', $url, $m)) {
+            return ['type' => 'vimeo', 'embed' => 'https://player.vimeo.com/video/'.$m[1].'?autoplay=1', 'thumb' => null];
+        }
+
+        return ['type' => 'file', 'embed' => media($url), 'thumb' => null];
+    }
+}
+
 if (! function_exists('setting')) {
     function setting(string $key, $default = null)
     {

@@ -29,6 +29,27 @@
   });
 })();
 
+/* ---- Video album lightbox (plays YouTube / Vimeo / file in a modal) ---- */
+(function () {
+  const grid = document.getElementById("videoGrid");
+  const lb = document.getElementById("vLightbox");
+  if (!grid || !lb) return;
+  const frame = document.getElementById("vLbFrame");
+  const open = (type, embed) => {
+    if (type === "file") {
+      frame.innerHTML = '<video src="' + embed + '" controls autoplay playsinline></video>';
+    } else {
+      frame.innerHTML = '<iframe src="' + embed + '" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    }
+    lb.classList.add("open"); lb.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
+  };
+  const close = () => { lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true"); frame.innerHTML = ""; document.body.style.overflow = ""; };
+  grid.querySelectorAll(".video-thumb").forEach(btn => btn.addEventListener("click", () => open(btn.dataset.type, btn.dataset.embed)));
+  document.getElementById("vLbClose").addEventListener("click", close);
+  lb.addEventListener("click", e => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && lb.classList.contains("open")) close(); });
+})();
+
 /* ---- Section carousels: prev/next arrows scroll the .h-scroll track ---- */
 document.querySelectorAll(".arrows").forEach(arrows => {
   const sec = arrows.closest("section");
