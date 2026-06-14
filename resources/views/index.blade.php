@@ -118,7 +118,7 @@
         <div class="body">
           <h3>{{ $e->title ?: $e->name }}</h3>
           <p>{{ $e->description }}</p>
-          <a class="btn btn-orange" href="{{ route('equipment.show', $e) }}">Rent Now {!! $arrow !!}</a>
+          <a class="btn btn-orange" href="{{ route('equipment.show', $e) }}">Read more {!! $arrow !!}</a>
         </div>
       </article>
       @endforeach
