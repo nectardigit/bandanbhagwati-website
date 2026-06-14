@@ -19,6 +19,7 @@ Route::get('/project', [SiteController::class, 'projects'])->name('projects');
 Route::get('/projects/{project}', [SiteController::class, 'projectShow'])->name('projects.show');
 
 Route::get('/team', [SiteController::class, 'team'])->name('team');
+Route::get('/team/{teamMember:slug}', [SiteController::class, 'teamShow'])->name('team.show');
 
 Route::get('/clients', [SiteController::class, 'clients'])->name('clients');
 

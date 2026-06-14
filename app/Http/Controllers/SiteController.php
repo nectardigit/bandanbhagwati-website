@@ -152,6 +152,19 @@ class SiteController extends Controller
         ]);
     }
 
+    public function teamShow(TeamMember $teamMember)
+    {
+        abort_unless($teamMember->is_active, 404);
+
+        return view('team-detail', [
+            'member' => $teamMember,
+            'others' => TeamMember::where('is_active', true)
+                ->where('id', '!=', $teamMember->id)
+                ->when($teamMember->department, fn ($q) => $q->where('department', $teamMember->department))
+                ->orderBy('sort')->take(4)->get(),
+        ]);
+    }
+
     public function clients()
     {
         return view('clients', [

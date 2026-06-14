@@ -484,6 +484,20 @@ button{font-family:inherit;cursor:pointer}
 .team-card .info .ts{display:flex;justify-content:center;gap:14px}
 .team-card .info .ts a{color:#fff;transition:.2s}
 .team-card .info .ts a:hover{color:var(--orange)}
+.team-card .info .view-profile{display:block;font-size:12.5px;font-weight:600;color:#fff;opacity:.9;margin-top:6px}
+/* Member profile (detail) page */
+.member-detail{display:grid;grid-template-columns:340px 1fr;gap:44px;align-items:start}
+.member-photo img{width:100%;border-radius:18px;display:block;box-shadow:0 14px 34px rgba(15,19,32,.14)}
+.member-info .member-role{color:var(--orange);font-weight:700;font-size:18px;margin:0 0 16px}
+.member-socials{display:flex;gap:12px;margin:0 0 24px}
+.member-socials a{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--blue);transition:.2s}
+.member-socials a:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.member-bio{color:var(--muted);line-height:1.7;font-size:16px}
+.member-bio p{margin:0 0 12px}
+.member-bio h1,.member-bio h2,.member-bio h3,.member-bio h4{color:var(--blue);margin:18px 0 8px}
+.member-bio ul,.member-bio ol{margin:0 0 12px;padding-left:20px}
+@media(max-width:760px){.member-detail{grid-template-columns:1fr;gap:24px}.member-photo{max-width:300px}}
+
 /* Initials avatar (when a member has no photo) */
 .team-avatar{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:78px;font-weight:800;color:#fff;letter-spacing:2px}
 .team-avatar.v1{background:linear-gradient(150deg,#0b4fa8,#073a7d)}
