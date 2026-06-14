@@ -22,8 +22,9 @@
   @endif
   <div class="wrap">
     <p class="kicker">{{ $settings['hero_kicker'] ?? 'We Developed Landmark Real Estate Projects.' }}</p>
-    @if ($home?->hero_title)
-      <h1>{{ $home->hero_title }}</h1>
+    @php($heroTitle = trim($settings['hero_title'] ?? '') ?: trim((string) ($home?->hero_title ?? '')))
+    @if ($heroTitle !== '')
+      <h1>{{ $heroTitle }}</h1>
     @else
       <h1>We Your <span class="o">Trusted</span><br><span class="o">Construction</span> Partner</h1>
     @endif
