@@ -69,6 +69,38 @@
   </div>
 </section>
 
+<!-- ===== ONGOING PROJECT ===== -->
+<section class="section ongoing">
+  <div class="wrap">
+    <span class="eyebrow">{{ $home?->ongoing_eyebrow ?: 'Our Ongoing Project' }}</span>
+    <div class="head-row">
+      <div><h2 class="h-sec">{{ $home?->ongoing_title ?: 'Work in Action' }}</h2><p class="sub">{{ $home?->ongoing_sub ?: 'Delivering quality through every step of the process.' }}</p></div>
+      <div class="head-actions">
+        <div class="proj-toggle">
+          <button class="active" data-set="ongoing">Ongoing</button>
+          <button data-set="completed">Completed</button>
+        </div>
+        <a class="btn btn-orange" href="{{ url('/project') }}">View all {!! $arrow !!}</a>
+        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
+      </div>
+    </div>
+    <div class="proj-grid h-scroll" id="ongoingGrid">
+      @foreach ($ongoing as $p)
+      <a class="proj-card" data-set="ongoing" href="{{ route('projects.show', $p) }}">
+        <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
+        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
+      </a>
+      @endforeach
+      @foreach ($projects as $p)
+      <a class="proj-card" data-set="completed" href="{{ route('projects.show', $p) }}">
+        <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
+        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
+      </a>
+      @endforeach
+    </div>
+  </div>
+</section>
+
 <!-- ===== EQUIPMENT SHOWCASE ===== -->
 <section class="section" style="padding-top:20px">
   <div class="wrap">
@@ -150,37 +182,6 @@
 
 {{-- "Showcasing Our Work" (completed) section hidden — the "Work in Action" section below now toggles Ongoing/Completed. --}}
 
-<!-- ===== ONGOING PROJECT ===== -->
-<section class="section ongoing">
-  <div class="wrap">
-    <span class="eyebrow">{{ $home?->ongoing_eyebrow ?: 'Our Ongoing Project' }}</span>
-    <div class="head-row">
-      <div><h2 class="h-sec">{{ $home?->ongoing_title ?: 'Work in Action' }}</h2><p class="sub">{{ $home?->ongoing_sub ?: 'Delivering quality through every step of the process.' }}</p></div>
-      <div class="head-actions">
-        <div class="proj-toggle">
-          <button class="active" data-set="ongoing">Ongoing</button>
-          <button data-set="completed">Completed</button>
-        </div>
-        <a class="btn btn-orange" href="{{ url('/project') }}">View all {!! $arrow !!}</a>
-        <div class="arrows"><button aria-label="prev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button aria-label="next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div>
-      </div>
-    </div>
-    <div class="proj-grid h-scroll" id="ongoingGrid">
-      @foreach ($ongoing as $p)
-      <a class="proj-card" data-set="ongoing" href="{{ route('projects.show', $p) }}">
-        <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
-        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
-      </a>
-      @endforeach
-      @foreach ($projects as $p)
-      <a class="proj-card" data-set="completed" href="{{ route('projects.show', $p) }}">
-        <img loading="lazy" decoding="async" src="{{ media($p->cover_image) }}" alt="{{ $p->title }}">
-        <div class="cap"><small>{{ $p->caption }}</small><b>{{ $p->client }}</b></div>
-      </a>
-      @endforeach
-    </div>
-  </div>
-</section>
 
 <!-- ===== STATS ===== -->
 <section class="stats">
