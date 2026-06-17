@@ -848,7 +848,8 @@ img.cone{object-fit:contain}
   .m-hero-track::-webkit-scrollbar{display:none}
   .m-hero-slide{flex:0 0 100%;scroll-snap-align:center;min-height:460px;display:flex;align-items:center;
     padding:0 24px;color:#fff;background-size:cover;background-position:center;position:relative}
-  .m-hero-slide:not(.grad)::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,9,14,.4) 0%,rgba(7,9,14,.82) 100%)}
+  .m-hero-slide .m-hero-bg,.m-hero-slide .m-hero-bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center;z-index:0}
+  .m-hero-slide:not(.grad)::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,9,14,.4) 0%,rgba(7,9,14,.82) 100%)}
   .m-hero-slide.g2{background:linear-gradient(135deg,#0b4fa8,#01a0c7)}
   .m-hero-slide.g3{background:linear-gradient(135deg,#0a3f86,#0b4fa8)}
   .m-hero-slide.g4{background:linear-gradient(135deg,#f5a000,#d98600)}
