@@ -854,6 +854,19 @@ img.cone{object-fit:contain}
   .logo .logo-img{height:36px}
   .equip-filter{gap:10px;margin-bottom:30px}
   .equip-filter button{padding:8px 15px;font-size:13px}
+  /* Section headers (Work in Action / Equipment / Blog) — let actions wrap */
+  .head-row{margin-bottom:26px}
+  .head-actions{flex-wrap:wrap;gap:12px;width:100%}
+  .head-actions .btn{flex:0 0 auto}
+  /* Carousels: shorter project cards + readable equipment cards on phones */
+  .proj-card{height:300px}
+  .proj-card .cap{left:18px;bottom:18px}
+  .proj-card .cap small{font-size:14px}
+  .proj-card .cap b{font-size:18px}
+  .eq-card img{height:190px}
+  .eq-card h3{font-size:20px}
+  .eq-card .body{padding:18px 18px 22px}
+  .h-scroll>*{flex:0 0 86%}
   .stat{padding:10px 14px}
   .stat+.stat::before{display:none}
   .testi-card{grid-template-columns:1fr;text-align:center;padding:28px}
