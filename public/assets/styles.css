@@ -532,7 +532,7 @@ button{font-family:inherit;cursor:pointer}
 }
 /* city photo (432x493 ≈ 0.88) — larger, top-right */
 .about-imgs .ph2{
-  position:absolute;right:0;top:157;width:340px;height:388px;border-radius:18px;
+  position:absolute;right:0;top:157px;width:340px;height:388px;border-radius:18px;
   object-fit:cover;box-shadow:0 20px 50px rgba(0,0,0,.18)
 }
 /* under-construction render (217x259) — bottom-left, overlapping engineers photo */
@@ -827,9 +827,11 @@ img.cone{object-fit:contain}
 /* ---- phones ---- */
 @media(max-width:600px){
   .wrap{padding:0 18px}
-  .grid4,.cat-grid,.proj-grid,.stats .wrap,.footer .wrap,
+  .grid4,.cat-grid,.proj-grid,.footer .wrap,
   .svc-grid,.gallery-grid,.team-grid,.blog-list-grid,.team-row,
   .exp-grid,.bd-duo,.pd-intro,.about-cards,.contact-form .row2{grid-template-columns:1fr}
+  .stats .wrap{grid-template-columns:1fr 1fr;gap:22px 0}
+  .stat{justify-content:center;padding:0 8px}
   .cat{border-right:none!important}
   .hero{min-height:520px;text-align:left}
   .hero h1{font-size:36px}
@@ -840,14 +842,11 @@ img.cone{object-fit:contain}
   .page-banner{min-height:280px}
   .page-banner h1{font-size:32px}
   .head-row{flex-direction:column;align-items:flex-start;gap:18px}
-  /* About images: scale to fit narrow screens (children are absolutely positioned) */
-  .about-imgs{min-height:360px;max-width:380px}
-  .about-imgs .ph2{width:62%;height:280px;top:0}
-  .about-imgs .ph1{width:46%;height:196px;top:84px}
-  .about-imgs .badge-img{left:24%;top:6px;width:148px}
-  .about-imgs .badge{left:14px;top:6px;padding:12px 18px;gap:12px}
-  .about-imgs .badge b{font-size:24px}
-  .about-imgs .cone{left:2%;top:232px;width:92px}
+  /* About images: show the main photo full-width — cleaner than the overlapping cluster */
+  .about-imgs{position:relative;min-height:0;max-width:none;margin:0}
+  .about-imgs .ph2{position:static;width:100%;height:auto;top:auto;right:auto;border-radius:16px}
+  .about-imgs .ph1,.about-imgs .cone,.about-imgs .badge{display:none}
+  .about-imgs .badge-img{left:14px;right:auto;top:auto;bottom:14px;width:150px}
   .logo .logo-img{height:36px}
   .equip-filter{gap:10px;margin-bottom:30px}
   .equip-filter button{padding:8px 15px;font-size:13px}
