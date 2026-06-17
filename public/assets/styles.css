@@ -846,7 +846,7 @@ img.cone{object-fit:contain}
   .m-hero{position:relative;overflow:hidden}
   .m-hero-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
   .m-hero-track::-webkit-scrollbar{display:none}
-  .m-hero-slide{flex:0 0 100%;scroll-snap-align:center;min-height:460px;display:flex;align-items:center;
+  .m-hero-slide{flex:0 0 100%;scroll-snap-align:center;min-height:230px;display:flex;align-items:center;
     padding:0 24px;color:#fff;background-size:cover;background-position:center;position:relative}
   .m-hero-slide .m-hero-bg,.m-hero-slide .m-hero-bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center;z-index:0}
   .m-hero-slide:not(.grad)::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,9,14,.4) 0%,rgba(7,9,14,.82) 100%)}
@@ -856,7 +856,9 @@ img.cone{object-fit:contain}
   .m-hero-in{position:relative;z-index:2;max-width:92%}
   .m-hero-in .kicker{color:var(--orange);font-weight:700;font-size:14px;margin:0 0 10px}
   .m-hero-slide.grad .m-hero-in .kicker{color:#fff;opacity:.9}
-  .m-hero-in h2{font-size:30px;font-weight:800;line-height:1.12;margin:0 0 20px;color:#fff}
+  .m-hero-in h2{font-size:23px;font-weight:800;line-height:1.14;margin:0 0 14px;color:#fff}
+  .m-hero-in .kicker{margin-bottom:7px}
+  .m-hero-in .btn{padding:10px 18px;font-size:14px}
   .m-hero-dots{position:absolute;left:0;right:0;bottom:16px;display:flex;gap:7px;justify-content:center;z-index:3}
   .m-hero-dots button{width:7px;height:7px;border-radius:50%;border:0;background:rgba(255,255,255,.55);padding:0;cursor:pointer;transition:.2s}
   .m-hero-dots button.active{background:#fff;width:20px;border-radius:4px}
