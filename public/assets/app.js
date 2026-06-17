@@ -1,33 +1,45 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
-/* ---- Mobile hero banner carousel (dots + auto-advance) ---- */
+/* ---- Mobile hero video carousel (one slide per hero video) ---- */
 (function () {
   const track = document.getElementById("mHeroTrack");
   const dotsWrap = document.getElementById("mHeroDots");
-  if (!track || !dotsWrap) return;
+  if (!track) return;
   const slides = Array.from(track.children);
-  slides.forEach((s, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.setAttribute("aria-label", "Slide " + (i + 1));
-    if (i === 0) b.className = "active";
-    b.addEventListener("click", () => track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }));
-    dotsWrap.appendChild(b);
-  });
-  const dots = Array.from(dotsWrap.children);
   let current = 0;
+
+  const playActive = () => {
+    slides.forEach((s, j) => {
+      const v = s.querySelector("video");
+      if (!v) return;
+      if (j === current) { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else { try { v.pause(); } catch (e) {} }
+    });
+  };
+
+  // dots only when there is more than one slide
+  let dots = [];
+  if (dotsWrap && slides.length > 1) {
+    slides.forEach((s, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Slide " + (i + 1));
+      if (i === 0) b.className = "active";
+      b.addEventListener("click", () => track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }));
+      dotsWrap.appendChild(b);
+    });
+    dots = Array.from(dotsWrap.children);
+  }
+
   track.addEventListener("scroll", () => {
-    current = Math.round(track.scrollLeft / track.clientWidth);
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    if (i === current) return;
+    current = i;
     dots.forEach((d, j) => d.classList.toggle("active", j === current));
+    playActive();
   });
-  // gentle auto-advance; stops once the visitor interacts
-  let timer = setInterval(() => {
-    current = (current + 1) % slides.length;
-    track.scrollTo({ left: track.clientWidth * current, behavior: "smooth" });
-  }, 5000);
-  const stop = () => clearInterval(timer);
-  track.addEventListener("touchstart", stop, { once: true, passive: true });
-  track.addEventListener("mousedown", stop, { once: true });
+
+  playActive();
 })();
 
 /* ---- Mobile nav (hamburger) ---- */

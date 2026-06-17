@@ -12,31 +12,29 @@
 
 <!-- ===== MOBILE hero carousel (phones only) ===== -->
 <div class="m-hero mobile-only">
+  @php($mHeroVids = ! empty($heroVideos) ? array_values($heroVideos) : [])
   <div class="m-hero-track" id="mHeroTrack">
+    @forelse ($mHeroVids as $i => $vid)
     <div class="m-hero-slide m-hero-first">
-      @if ($heroVideo)
-        <video class="hero-bg m-hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ $heroImage }}"
-               onended="this.currentTime=0; this.play();" onloadeddata="this.play().catch(()=>{});">
-          <source src="{{ $heroVideo }}" type="video/mp4">
-        </video>
-      @else
-        <div class="m-hero-bgimg" style="background-image:url('{{ $heroImage }}')"></div>
-      @endif
+      <video class="m-hero-bg" muted loop playsinline poster="{{ $heroImage }}" preload="{{ $i === 0 ? 'auto' : 'none' }}" @if($i === 0) autoplay @endif>
+        <source src="{{ media($vid) }}" type="video/mp4">
+      </video>
       <div class="m-hero-in">
         <p class="kicker">{{ $settings['hero_kicker'] ?? 'We Developed Landmark Real Estate Projects.' }}</p>
         <h2>{{ $settings['hero_title'] ?? 'We Are Your Trusted Construction Partner' }}</h2>
         <a class="btn btn-orange" href="{{ url('/service') }}">Get Started {!! $arrow !!}</a>
       </div>
     </div>
-    <a class="m-hero-slide grad g2" href="{{ url('/equipment') }}">
-      <div class="m-hero-in"><p class="kicker">Heavy Equipment</p><h2>Available on Rent</h2><span class="btn btn-orange">Read more {!! $arrow !!}</span></div>
-    </a>
-    <a class="m-hero-slide grad g3" href="{{ url('/project') }}">
-      <div class="m-hero-in"><p class="kicker">Our Portfolio</p><h2>Projects Across Nepal</h2><span class="btn btn-orange">Explore {!! $arrow !!}</span></div>
-    </a>
-    <a class="m-hero-slide grad g4" href="{{ url('/contact') }}">
-      <div class="m-hero-in"><p class="kicker">Start a Project</p><h2>Get a Free Quote</h2><span class="btn btn-orange">Contact us {!! $arrow !!}</span></div>
-    </a>
+    @empty
+    <div class="m-hero-slide m-hero-first">
+      <div class="m-hero-bgimg" style="background-image:url('{{ $heroImage }}')"></div>
+      <div class="m-hero-in">
+        <p class="kicker">{{ $settings['hero_kicker'] ?? 'We Developed Landmark Real Estate Projects.' }}</p>
+        <h2>{{ $settings['hero_title'] ?? 'We Are Your Trusted Construction Partner' }}</h2>
+        <a class="btn btn-orange" href="{{ url('/service') }}">Get Started {!! $arrow !!}</a>
+      </div>
+    </div>
+    @endforelse
   </div>
   <div class="m-hero-dots" id="mHeroDots"></div>
 </div>

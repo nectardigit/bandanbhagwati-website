@@ -50,6 +50,7 @@ class SiteController extends Controller
 
         return view('index', [
             'heroVideoPath' => $heroVideoPath,
+            'heroVideos'   => $heroVideos,
             'equipment'    => Equipment::where('is_active', true)->orderBy('sort')->take(12)->get(),
             'categories'   => Category::where('is_active', true)->orderBy('sort')->take(8)->get(),
             'services'     => Service::where('is_active', true)->where('show_in_accordion', true)->orderBy('sort')->get(),
