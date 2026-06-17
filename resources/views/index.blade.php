@@ -36,6 +36,29 @@
   </div>
 </section>
 
+<!-- ===== MOBILE app-style quick blocks (phones only) ===== -->
+@if (!empty($categories) && $categories->count())
+<div class="m-cats mobile-only">
+  <div class="m-cats-row">
+    @foreach ($categories as $c)
+      <a class="m-cat" href="{{ route('equipment', ['category' => $c->slug]) }}">
+        <span class="m-cat-ic">{{ $c->icon ?: '🏗️' }}</span>
+        <span class="m-cat-lbl">{{ \Illuminate\Support\Str::limit($c->name, 16) }}</span>
+      </a>
+    @endforeach
+  </div>
+</div>
+@endif
+
+<div class="m-promos mobile-only">
+  <div class="m-promo-track" id="mPromoTrack">
+    <a class="m-promo p1" href="{{ url('/equipment') }}"><div><small>Heavy Equipment</small><b>Available on Rent</b><span>Read more {!! $arrow !!}</span></div></a>
+    <a class="m-promo p2" href="{{ url('/project') }}"><div><small>Our Portfolio</small><b>Projects Across Nepal</b><span>Explore {!! $arrow !!}</span></div></a>
+    <a class="m-promo p3" href="{{ url('/contact') }}"><div><small>Start a Project</small><b>Get a Free Quote</b><span>Contact us {!! $arrow !!}</span></div></a>
+  </div>
+  <div class="m-promo-dots" id="mPromoDots"></div>
+</div>
+
 <!-- ===== ABOUT ===== -->
 <section class="section about" id="about">
   <div class="wrap">

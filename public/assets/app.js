@@ -1,5 +1,26 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
+/* ---- Mobile promo banner carousel dots ---- */
+(function () {
+  const track = document.getElementById("mPromoTrack");
+  const dotsWrap = document.getElementById("mPromoDots");
+  if (!track || !dotsWrap) return;
+  const slides = Array.from(track.children);
+  slides.forEach((s, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "Slide " + (i + 1));
+    if (i === 0) b.className = "active";
+    b.addEventListener("click", () => s.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+  track.addEventListener("scroll", () => {
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach((d, j) => d.classList.toggle("active", j === i));
+  });
+})();
+
 /* ---- Mobile nav (hamburger) ---- */
 (function () {
   const toggle = document.getElementById("navToggle");
