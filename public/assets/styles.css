@@ -833,9 +833,13 @@ img.cone{object-fit:contain}
   .stats .wrap{grid-template-columns:1fr 1fr;gap:22px 0}
   .stat{justify-content:center;padding:0 8px}
   .cat{border-right:none!important}
-  .hero{min-height:520px;text-align:left}
-  .hero h1{font-size:36px}
-  .hero p{font-size:17px}
+  .hero{min-height:480px;text-align:left}
+  .hero .bg::after,.hero .hero-overlay{background:linear-gradient(180deg,rgba(7,9,14,.5) 0%,rgba(7,9,14,.82) 100%)}
+  .hero .wrap{padding-top:80px;padding-bottom:64px}
+  .hero .kicker{font-size:16px;margin-bottom:12px}
+  .hero h1{font-size:34px}
+  .hero p{font-size:16px}
+  .hero .cta .btn{width:100%;justify-content:center}
   .hero .cta{flex-direction:column;align-items:flex-start}
   .h-sec,.about-body h2,.serv-left h2,.contact .panel h2,.testi-left h2,
   .sd-col h2,.sd-about h2,.bd-main h2,.news h2,.related h3{font-size:27px}
