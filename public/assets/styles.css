@@ -827,9 +827,10 @@ img.cone{object-fit:contain}
 /* ---- phones ---- */
 @media(max-width:600px){
   .wrap{padding:0 18px}
-  .grid4,.cat-grid,.proj-grid,.footer .wrap,
-  .svc-grid,.gallery-grid,.team-grid,.blog-list-grid,.team-row,
-  .exp-grid,.bd-duo,.pd-intro,.about-cards,.contact-form .row2{grid-template-columns:1fr}
+  .footer .wrap,.team-row,.exp-grid,.bd-duo,.pd-intro,.about-cards,.contact-form .row2{grid-template-columns:1fr}
+  /* App-style 2-column card grids on phones */
+  .grid4:not(.h-scroll),.proj-grid:not(.h-scroll),.cat-grid,.svc-grid,.gallery-grid,.team-grid,.blog-list-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .section{padding:46px 0}
   .stats .wrap{grid-template-columns:1fr 1fr;gap:22px 0}
   .stat{justify-content:center;padding:0 8px}
   .cat{border-right:none!important}
@@ -867,6 +868,21 @@ img.cone{object-fit:contain}
   .eq-card h3{font-size:20px}
   .eq-card .body{padding:18px 18px 22px}
   .h-scroll>*{flex:0 0 86%}
+  /* Compact cards inside the 2-column listing grids (app style) */
+  .grid4:not(.h-scroll) .eq-card img{height:118px}
+  .grid4:not(.h-scroll) .eq-card .body{padding:12px}
+  .grid4:not(.h-scroll) .eq-card h3{font-size:15px;margin:0 0 6px}
+  .grid4:not(.h-scroll) .eq-card p{font-size:12px;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .grid4:not(.h-scroll) .eq-card .btn{font-size:12px;padding:9px 12px;width:100%;justify-content:center}
+  .proj-grid:not(.h-scroll) .proj-card{height:220px}
+  .proj-grid:not(.h-scroll) .proj-card .cap small{font-size:12px}
+  .proj-grid:not(.h-scroll) .proj-card .cap b{font-size:14px}
+  .proj-grid:not(.h-scroll) .proj-card .more{display:none}
+  .cat{padding:18px 10px}
+  .cat .circle{width:54px;height:54px}
+  .cat h4{font-size:15px}
+  .cat p{font-size:12px}
+  .team-card{height:236px}
   .stat{padding:10px 14px}
   .stat+.stat::before{display:none}
   .testi-card{grid-template-columns:1fr;text-align:center;padding:28px}
