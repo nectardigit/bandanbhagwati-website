@@ -108,6 +108,9 @@
       <div class="nav-actions">
         <button class="btn talk-btn" onclick="location.href='{{ $s['talk_url'] ?? url('/contact') }}'">{{ $s['talk_label'] ?? "Let's Talk" }} <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
       </div>
+      <button class="hamburger" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>

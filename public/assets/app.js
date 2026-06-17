@@ -1,5 +1,23 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
+/* ---- Mobile nav (hamburger) ---- */
+(function () {
+  const toggle = document.getElementById("navToggle");
+  const navBlue = toggle && toggle.closest(".nav-blue");
+  if (!toggle || !navBlue) return;
+  const setOpen = open => {
+    navBlue.classList.toggle("open", open);
+    toggle.classList.toggle("active", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+  toggle.addEventListener("click", () => setOpen(!navBlue.classList.contains("open")));
+  // close after tapping a link, or when tapping outside
+  navBlue.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("click", e => {
+    if (navBlue.classList.contains("open") && !navBlue.contains(e.target)) setOpen(false);
+  });
+})();
+
 /* ---- Photo album lightbox ---- */
 (function () {
   const grid = document.getElementById("albumGrid");
