@@ -9,7 +9,31 @@
 <!-- ===== HERO ===== -->
 @php($heroImage = ($settings['hero_image'] ?? null) ? media($settings['hero_image']) : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80')
 @php($heroVideo = ! empty($heroVideoPath) ? media($heroVideoPath) : (($settings['hero_video'] ?? null) ? media($settings['hero_video']) : null))
-<section class="hero">
+
+<!-- ===== MOBILE hero carousel (phones only) ===== -->
+<div class="m-hero mobile-only">
+  <div class="m-hero-track" id="mHeroTrack">
+    <div class="m-hero-slide" style="background-image:url('{{ $heroImage }}')">
+      <div class="m-hero-in">
+        <p class="kicker">{{ $settings['hero_kicker'] ?? 'We Developed Landmark Real Estate Projects.' }}</p>
+        <h2>{{ $settings['hero_title'] ?? 'We Are Your Trusted Construction Partner' }}</h2>
+        <a class="btn btn-orange" href="{{ url('/service') }}">Get Started {!! $arrow !!}</a>
+      </div>
+    </div>
+    <a class="m-hero-slide grad g2" href="{{ url('/equipment') }}">
+      <div class="m-hero-in"><p class="kicker">Heavy Equipment</p><h2>Available on Rent</h2><span class="btn btn-orange">Read more {!! $arrow !!}</span></div>
+    </a>
+    <a class="m-hero-slide grad g3" href="{{ url('/project') }}">
+      <div class="m-hero-in"><p class="kicker">Our Portfolio</p><h2>Projects Across Nepal</h2><span class="btn btn-orange">Explore {!! $arrow !!}</span></div>
+    </a>
+    <a class="m-hero-slide grad g4" href="{{ url('/contact') }}">
+      <div class="m-hero-in"><p class="kicker">Start a Project</p><h2>Get a Free Quote</h2><span class="btn btn-orange">Contact us {!! $arrow !!}</span></div>
+    </a>
+  </div>
+  <div class="m-hero-dots" id="mHeroDots"></div>
+</div>
+
+<section class="hero desktop-only">
   @if ($heroVideo)
     <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ $heroImage }}"
            onended="this.currentTime=0; this.play();"
@@ -49,15 +73,6 @@
   </div>
 </div>
 @endif
-
-<div class="m-promos mobile-only">
-  <div class="m-promo-track" id="mPromoTrack">
-    <a class="m-promo p1" href="{{ url('/equipment') }}"><div><small>Heavy Equipment</small><b>Available on Rent</b><span>Read more {!! $arrow !!}</span></div></a>
-    <a class="m-promo p2" href="{{ url('/project') }}"><div><small>Our Portfolio</small><b>Projects Across Nepal</b><span>Explore {!! $arrow !!}</span></div></a>
-    <a class="m-promo p3" href="{{ url('/contact') }}"><div><small>Start a Project</small><b>Get a Free Quote</b><span>Contact us {!! $arrow !!}</span></div></a>
-  </div>
-  <div class="m-promo-dots" id="mPromoDots"></div>
-</div>
 
 <!-- ===== ABOUT ===== -->
 <section class="section about" id="about">

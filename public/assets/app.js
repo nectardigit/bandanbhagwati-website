@@ -1,9 +1,9 @@
 /* ===== Bandan Bhagwati — front-end interactions (data is server-rendered) ===== */
 
-/* ---- Mobile promo banner carousel dots ---- */
+/* ---- Mobile hero banner carousel (dots + auto-advance) ---- */
 (function () {
-  const track = document.getElementById("mPromoTrack");
-  const dotsWrap = document.getElementById("mPromoDots");
+  const track = document.getElementById("mHeroTrack");
+  const dotsWrap = document.getElementById("mHeroDots");
   if (!track || !dotsWrap) return;
   const slides = Array.from(track.children);
   slides.forEach((s, i) => {
@@ -11,14 +11,23 @@
     b.type = "button";
     b.setAttribute("aria-label", "Slide " + (i + 1));
     if (i === 0) b.className = "active";
-    b.addEventListener("click", () => s.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" }));
+    b.addEventListener("click", () => track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }));
     dotsWrap.appendChild(b);
   });
   const dots = Array.from(dotsWrap.children);
+  let current = 0;
   track.addEventListener("scroll", () => {
-    const i = Math.round(track.scrollLeft / track.clientWidth);
-    dots.forEach((d, j) => d.classList.toggle("active", j === i));
+    current = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach((d, j) => d.classList.toggle("active", j === current));
   });
+  // gentle auto-advance; stops once the visitor interacts
+  let timer = setInterval(() => {
+    current = (current + 1) % slides.length;
+    track.scrollTo({ left: track.clientWidth * current, behavior: "smooth" });
+  }, 5000);
+  const stop = () => clearInterval(timer);
+  track.addEventListener("touchstart", stop, { once: true, passive: true });
+  track.addEventListener("mousedown", stop, { once: true });
 })();
 
 /* ---- Mobile nav (hamburger) ---- */
